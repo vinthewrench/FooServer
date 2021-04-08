@@ -1,0 +1,8 @@
+build
+.DS_Store
+_Archived Items
+xcuserdata
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+Icon?

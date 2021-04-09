@@ -41,7 +41,9 @@ public:
 	
 	//convenience wrappers to TCPServerConnection
 	void sendReply(std::string reply);
-
+	
+	TCPClientInfo getClientInfo() { return _server->_info; };
+	
 private:
 
 	void registerBuiltInCommands();

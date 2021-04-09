@@ -5,16 +5,17 @@
 //  Created by Vincent Moscaritolo on 3/13/21.
 //
 
-#include "RESTServerConnection.hpp"
-#include "yuarel.h"
-#include "json.hpp"
-
 #include <iostream>
 #include <iomanip>
 #include <sstream>
 
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include "yuarel.h"
+#include "json.hpp"
+
+#include "RESTServerConnection.hpp"
+ #include "TCPClientInfo.hpp"
 
 using namespace nlohmann;
 using namespace std;
@@ -62,8 +63,11 @@ struct RESTServerConnection::Private
 		struct yuarel url;
 		
 		string errorReply;
-		
+ 
 		rs->processHeaders();
+	
+		// update the headers
+		rs->_info.setHeaders(rs->_headers);
 		
 		yuarel_parse(&url, rs->_url);
 		
@@ -85,7 +89,7 @@ struct RESTServerConnection::Private
 					auto j = json::parse(str);
 					
 					if(rs->validateRequestCredentials(j)) {
-						rs->queueCommand(j, [=] (json rp, httpStatusCodes_t code){
+						rs->queueServerCommand(j, [=] (json rp, httpStatusCodes_t code){
 							
 							string body;
 							if(rp.size())
@@ -213,7 +217,7 @@ struct RESTServerConnection::Private
 // MARK: - RESTServerConnection
 
 RESTServerConnection::RESTServerConnection()
-		:TCPServerConnection(TCPClientInfo::CLIENT_REST){
+		:TCPServerConnection(TCPClientInfo::CLIENT_REST, "REST"){
 //	cout<<"Constructing RESTServerConnection \n";
 	
 	memset(&_hpCB, 0, sizeof(http_parser_settings));

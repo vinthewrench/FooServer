@@ -64,7 +64,7 @@ public:
 
 	// for subclass
 	virtual void sendString(const std::string) = 0;
-	virtual void queueCommand(json cmd, ServerCmdQueue::cmdCallback_t completion );
+	virtual void queueServerCommand(json cmd, ServerCmdQueue::cmdCallback_t completion );
 
 	// useful but not necessary
 	virtual void closeConnection() = 0;
@@ -79,7 +79,8 @@ public:
 	uint8_t 			_id;			// this can be protected ?
 
 protected:
-	TCPServerConnection(TCPClientInfo::clientType_t clientType);
+	TCPServerConnection(TCPClientInfo::clientType_t clientType,
+							  const string clientName );
 	virtual ~TCPServerConnection() {};
  
 	int 						 _fd;

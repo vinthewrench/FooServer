@@ -58,7 +58,9 @@ vector<TCPClientInfo> TCPServerMgr::getConnectionList() {
  
  
 // MARK: - TCPServerConnection
-TCPServerConnection::TCPServerConnection(TCPClientInfo::clientType_t clientType):_info(clientType) {
+TCPServerConnection::TCPServerConnection( TCPClientInfo::clientType_t clientType,
+													  const string clientName)
+					:_info(clientType,clientName) {
 }
 
 ssize_t TCPServerConnection::sendData(const void *buffer, size_t length){
@@ -73,9 +75,9 @@ void  TCPServerConnection::close() {
 	_server->close_socket(_fd);
 }
 
-void TCPServerConnection::queueCommand(json cmd,
+void TCPServerConnection::queueServerCommand(json request,
 														ServerCmdQueue::cmdCallback_t completion ){
-	_cmdQueue->queueCommand(cmd, completion);
+	_cmdQueue->queueCommand(request, _info, completion);
 }
  
 // MARK: - TCPServer
@@ -348,15 +350,18 @@ int TCPServer::check_new_connection(int max_fd){
 			if (client_fd > max_fd)
 				max_fd = client_fd;
 			
+		
 			TCPServerConnection* conn = _factory();
-			conn->_server = this;
-			conn->_info._remoteAddr = their_addr;
-			conn->_info._localPort	 = _port;
-		 
+	 		conn->_server = this;
 			conn->_cmdQueue = _cmdQueue;
 			conn->_fd = client_fd;
 			conn->_id = _entryCnt++; // every entry id unique
- 			_connections.push_back(conn);
+	
+			conn->_info._remoteAddr = their_addr;
+			conn->_info._localPort	 = _port;
+			conn->_info._connID = conn->_id;
+		 
+			_connections.push_back(conn);
 			
 	//		printf("OPEN %d\n", client_fd);
 			conn->didOpen();

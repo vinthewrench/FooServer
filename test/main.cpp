@@ -143,8 +143,9 @@ constexpr string_view JSON_ARG_FUNCTION		= "function";
 constexpr string_view JSON_ARG_DATE				= "date";
 constexpr string_view JSON_ARG_VERSION			= "version";
 constexpr string_view JSON_ARG_TIMESTAMP		= "timestamp";
+constexpr string_view JSON_ARG_DEVICEIDS 		= "deviceIDs";
 
-
+ 
 
 constexpr string_view JSON_CMD_SETLEVEL 		= "set";
 constexpr string_view JSON_CMD_SHOWDEVICE 	= "show";
@@ -155,6 +156,7 @@ constexpr string_view JSON_CMD_VERSION			= "version";
 
 static void SetLevelCommand( ServerCmdQueue* cmdQueue,
 									 json request,  // entire request
+									 TCPClientInfo cInfo,
 									 ServerCmdQueue::cmdCallback_t completion){
 	using namespace rest;
 	json reply;
@@ -185,6 +187,7 @@ static void SetLevelCommand( ServerCmdQueue* cmdQueue,
 
 static void ShowDeviceCommand( ServerCmdQueue* cmdQueue,
 									 json request,  // entire request
+										TCPClientInfo cInfo,
 										ServerCmdQueue::cmdCallback_t completion){
 	using namespace rest;
 	json reply;
@@ -211,6 +214,7 @@ static void ShowDeviceCommand( ServerCmdQueue* cmdQueue,
 
 static void ShowDateCommand(ServerCmdQueue* cmdQueue,
 								  json request,  // entire request
+									 TCPClientInfo cInfo,
 								  ServerCmdQueue::cmdCallback_t completion) {
 	using namespace rest;
 	json reply;
@@ -232,6 +236,7 @@ static void ShowDateCommand(ServerCmdQueue* cmdQueue,
 
 static void PlmFunctionsCommand(ServerCmdQueue* cmdQueue,
 											json request,  // entire request
+										  TCPClientInfo cInfo,
 										  ServerCmdQueue::cmdCallback_t completion) {
 	using namespace rest;
 	json reply;
@@ -248,24 +253,70 @@ static void PlmFunctionsCommand(ServerCmdQueue* cmdQueue,
 		return;
 		
 	}
-	
-	makeStatusJSON(reply,STATUS_OK);
-	(completion) (reply, STATUS_OK);
-}
+	else {
+		makeStatusJSON(reply, STATUS_BAD_REQUEST, "No argument for function" );;
+		(completion) (reply, STATUS_BAD_REQUEST);
+	}
+ }
 
 static void GroupFunctionsCommand(ServerCmdQueue* cmdQueue,
 											json request,  // entire request
+											 TCPClientInfo cInfo,
 										  ServerCmdQueue::cmdCallback_t completion) {
 	using namespace rest;
 	json reply;
  	
-	makeStatusJSON(reply,STATUS_OK);
-	(completion) (reply, STATUS_OK);
+	
+		auto dump = request.dump(4);
+		dump = replaceAll(dump, "\n","\r\n" );
+		cout << dump << "\n";
+
+	ServerCmdArgValidator v;
+	DeviceIDArgValidator vDeviceID;
+
+	string groupFunc;
+	
+	if(v.getStringFromJSON(JSON_ARG_FUNCTION, request, groupFunc)){
+		
+		printf("Group %s \n", groupFunc.c_str());
+		
+		string key = string(JSON_ARG_DEVICEIDS);
+		
+		if( request.contains(key)
+			&& request.at(key).is_array()){
+			
+			auto deviceIDs = request.at(key);
+			
+			for(auto val : deviceIDs){
+				if(val.is_string()){
+					string deviceID = val;
+					
+					if(vDeviceID.validateArg(deviceID)) {
+						printf("add: %s\n",deviceID.c_str());
+					}
+					else {
+						// flag error
+					}
+				}
+				
+			}
+		}
+		
+		makeStatusJSON(reply,STATUS_OK);
+		(completion) (reply, STATUS_OK);
+		return;
+		
+	}
+	else {
+		makeStatusJSON(reply, STATUS_BAD_REQUEST, "No argument for function" );;
+		(completion) (reply, STATUS_BAD_REQUEST);
+	}
 }
 
 
 static void VersionCommand(ServerCmdQueue* cmdQueue,
 											json request,  // entire request
+										TCPClientInfo cInfo,
 										  ServerCmdQueue::cmdCallback_t completion) {
 	using namespace rest;
 	json reply;
@@ -290,6 +341,7 @@ static bool SETcmdHandler( stringvector 		line,
 	string command = line[0];
 	string deviceID;
 	string onlevel;
+	
 	
 	DeviceIDArgValidator v1;
 	DeviceLevelArgValidator v2;
@@ -335,7 +387,9 @@ static bool SETcmdHandler( stringvector 		line,
 //		cout << dump << "\n";
 //
 		ServerCmdQueue* cmdQueue = ServerCmdQueue::shared();
-		cmdQueue->queueCommand(request,[=] (json reply, httpStatusCodes_t code) {
+		TCPClientInfo cInfo = mgr->getClientInfo();
+
+		cmdQueue->queueCommand(request, cInfo, [=] (json reply, httpStatusCodes_t code) {
 			
 			bool success = didSucceed(reply);
 			
@@ -357,14 +411,15 @@ static bool SETcmdHandler( stringvector 		line,
 	return false;
 };
 
-static bool DATEcmdHandler( stringvector commandLine,
-									CmdLineMgr* cmdLine,
+static bool DATEcmdHandler( stringvector line,
+									CmdLineMgr* mgr,
 									boolCallback_t	cb){
 	using namespace rest;
 	json request;
 	request[kREST_command] =  JSON_CMD_DATE ;
 	
-	ServerCmdQueue::shared()->queueCommand(request,[=] (json reply, httpStatusCodes_t code) {
+	TCPClientInfo cInfo = mgr->getClientInfo();
+	ServerCmdQueue::shared()->queueCommand(request,cInfo, [=] (json reply, httpStatusCodes_t code) {
 		
 		string str;
   
@@ -386,7 +441,7 @@ static bool DATEcmdHandler( stringvector commandLine,
 		
 			str = string(asctime(timeinfo));  // asctime appends \n
 			
-			cmdLine->sendReply(str + "\r");
+			mgr->sendReply(str + "\r");
 		}
 		
 		(cb) (code > 199 && code < 400);
@@ -424,8 +479,8 @@ static bool SHOWcmdHandler( stringvector line,
 		request[kREST_command] =  JSON_CMD_SHOWDEVICE ;
 		request[string(JSON_ARG_DEVICEID)] =  line[1];
 		
-		ServerCmdQueue* cmdQueue = ServerCmdQueue::shared();
-		cmdQueue->queueCommand(request,[=] (json reply, httpStatusCodes_t code) {
+		TCPClientInfo cInfo = mgr->getClientInfo();
+		ServerCmdQueue::shared()->queueCommand(request,cInfo, [=] (json reply, httpStatusCodes_t code) {
 			
 			bool success = didSucceed(reply);
 			
@@ -453,20 +508,25 @@ static bool SHOWcmdHandler( stringvector line,
 	}
 	
 	mgr->sendReply(errorStr + "\n\r");
+	(cb)(false);
 	return false;
 };
 
-static bool PLMcmdHandler( stringvector commandLine,
+static bool PLMcmdHandler( stringvector line,
 								  CmdLineMgr* mgr,
 								  boolCallback_t	cb){
 	using namespace rest;
 
+	
+	mgr->sendReply("not written yet \n\r");
+	(cb)(false);
+ 
 	return false;
 };
 
 
-static bool VersionCmdHandler( stringvector commandLine,
-								  CmdLineMgr* mgr,
+static bool VersionCmdHandler( stringvector line,
+								  		CmdLineMgr* mgr,
 										boolCallback_t	cb){
 	using namespace rest;
 	
@@ -474,7 +534,13 @@ static bool VersionCmdHandler( stringvector commandLine,
 	json request;
 	request[kREST_command] =  JSON_CMD_VERSION ;
 	
-	ServerCmdQueue::shared()->queueCommand(request,[=] (json reply, httpStatusCodes_t code) {
+	TCPClientInfo cInfo = mgr->getClientInfo();
+	
+	for (auto& t : cInfo.headers()){
+		printf("%s = %s\n", t.first.c_str(), t.second.c_str());
+	}
+
+	ServerCmdQueue::shared()->queueCommand(request,cInfo,[=] (json reply, httpStatusCodes_t code) {
 		
 		bool success = didSucceed(reply);
 		
@@ -494,6 +560,7 @@ static bool VersionCmdHandler( stringvector commandLine,
 	
 			oss << "\r\n";
 			mgr->sendReply(oss.str());
+					
 		}
 		else {
 			string error = errorMessage(reply);
@@ -508,23 +575,62 @@ static bool VersionCmdHandler( stringvector commandLine,
 };
 
 
-static bool GroupCmdHandler( stringvector commandLine,
+static bool GroupCmdHandler( stringvector line,
 								  CmdLineMgr* mgr,
 								  boolCallback_t	cb){
+ 
 	using namespace rest;
+	string errorStr;
 
-	using namespace rest;
-	json request;
-	request[kREST_command] =  JSON_CMD_GROUP ;
-	
-	ServerCmdQueue::shared()->queueCommand(request,[=] (json reply, httpStatusCodes_t code) {
+	string command = line[0];
+
+	if(line.size() < 2){
+		errorStr =  "Command: \x1B[36;1;4m"  + command + "\x1B[0m expects a function.";
+ 	}
+	else {
+		string subcommand = line[1];
+
+		json request;
+		request[kREST_command] =  JSON_CMD_GROUP ;
+
+		if(subcommand == "add"){
+			request[string(JSON_ARG_FUNCTION)] = "add";
+			
+			int count = 0;
+			for(int idx = 2; idx < line.size(); idx++) {
+				string item = line[idx];
+				request[string(JSON_ARG_DEVICEIDS)][count++] = item;
+			}
 		
+			TCPClientInfo cInfo = mgr->getClientInfo();
+			ServerCmdQueue::shared()->queueCommand(request,cInfo,[=] (json reply, httpStatusCodes_t code) {
 
-		(cb) (true);
-	});
-	 
+				bool success = didSucceed(reply);
+				
+				if(success) {
+					
+					auto dump = reply.dump(4);
+					dump = replaceAll(dump, "\n","\r\n" );
+					cout << dump << "\n";
+			 
+					mgr->sendReply( "OK\n\r" );
+					 
+				}
+				else {
+					string error = errorMessage(reply);
+					mgr->sendReply( error + "\n\r");
+				}
+				
+				(cb) (success);
+			});
+ 		}
 		return true;
- };
+	}
+	
+	mgr->sendReply(errorStr + "\n\r");
+	(cb)(false);
+	return false;
+};
 
 
 

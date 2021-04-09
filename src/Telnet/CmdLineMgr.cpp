@@ -194,12 +194,10 @@ void CmdLineMgr::doFinger(stringvector params){
 	auto conns =  TCPServerMgr().shared()->getConnectionList();
 	for(auto conn: conns){
 		
-		if(conn.isREST())
-			oss << "REST ";
-		 else 	if(conn.isTerminal())
-			 oss <<  "Term ";
+		oss << setw(4) << conn.connID() << setw(0)  << " ";
+		oss << setw(7) << conn.clientName() << setw(0)  << " ";
 		
-		oss << setw(4) << conn.localPort()  << " ";
+ 		oss << setw(4) << conn.localPort()  << " ";
 		oss << conn.remoteAddrString();
 		
 		string agent = conn.userAgent();

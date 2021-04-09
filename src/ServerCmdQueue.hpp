@@ -22,10 +22,12 @@
  
 #include "CommonDefs.hpp"
 #include "RESTutils.hpp"
+#include "TCPClientInfo.hpp"
 
 
 using namespace nlohmann;
 using namespace std;
+
 
 class ServerCmdQueue {
 
@@ -46,11 +48,13 @@ public:
 										httpStatusCodes_t code)> cmdCallback_t;
 	
 	void queueCommand(	json command,
+							TCPClientInfo cInfo,
 							cmdCallback_t completion );
 
 	
 	typedef std::function<void(ServerCmdQueue* ref,
  										json request,
+										TCPClientInfo cInfo,
 										cmdCallback_t completion)> cmdHandler_t;
 
 	bool registerCommand(	string_view cmd,

@@ -7,7 +7,11 @@
 
 #ifndef TCPClientInfo_h
 #define TCPClientInfo_h
- 
+
+#include <map>
+#include <string>
+
+
 using namespace std;
 
 class TCPServerConnection;
@@ -38,12 +42,23 @@ class TCPClientInfo {
  	sockaddr_storage remoteAddr() { return _remoteAddr;};
 	string remoteAddrString();
 	
-protected:
-	TCPClientInfo(clientType_t typ) {_type = typ;};
+	void setHeaders(map<string, string> h) { _headers = h;};
+	map<string, string> headers() {return _headers;};
 	
+	int connID() {return _connID;};
+	const string clientName() { return _name;};
+	
+protected:
+	TCPClientInfo(clientType_t typ, const string connName = "");
+	
+	string					_name;
 	clientType_t 		_type;
 	int 					_localPort;
 	sockaddr_storage 	_remoteAddr;
+	int 					_connID;
+
+	// for REST
+	map<string, string> _headers;
 	
 	// for terminals
 	bool _hasColor;

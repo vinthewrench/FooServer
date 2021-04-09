@@ -86,7 +86,7 @@ struct TelnetServerConnection::Private
 };
 
 TelnetServerConnection::TelnetServerConnection()
-			:TCPServerConnection(TCPClientInfo::CLIENT_TERMINAL),_cmdLineMgr(this){
+			:TCPServerConnection(TCPClientInfo::CLIENT_TERMINAL, "telnet"),_cmdLineMgr(this){
 	
 	_closing = false;
  

@@ -14,6 +14,13 @@
 
 using namespace std;
 
+TCPClientInfo::TCPClientInfo(clientType_t typ, const string connName) {
+	_name = connName;
+	_type = typ;
+	_headers.clear();
+	
+};
+
 std::string TCPClientInfo::remoteAddrString(){
 	std::ostringstream oss;
  

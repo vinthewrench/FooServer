@@ -57,17 +57,20 @@ ServerCmdQueue::cmdHandler_t ServerCmdQueue::handlerForCommand(string cmd){
 // MARK: - command management and processing
 
 void ServerCmdQueue::queueCommand(	json request,
+											 TCPClientInfo cInfo,
 											 cmdCallback_t completion ) {
 	
 	using namespace rest;
 
+ 
+	
 	if(request.contains(kREST_command)
 		&& request.at(kREST_command).is_string()) {
 		string cmd = request.at(kREST_command);
 		
 		cmdHandler_t func = handlerForCommand(cmd);
 		if(func) {
-	 		(func)(this, request, completion);
+	 		(func)(this, request, cInfo, completion);
 		}
 		else {
 			json reply;

@@ -150,7 +150,7 @@ private:
 	/**
 	 * This is the main routine of this class.
 	 * It accepts incoming connection and receives incoming data from these connections.
-	 * It is private because it is only executed in a different thread by start() method.
+	 * It is private because it is only executed in a different thread by begin() method.
 	 */
 	void run();
 

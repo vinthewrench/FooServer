@@ -17,7 +17,9 @@
 #include "CommonDefs.hpp"
 
 class  CmdLineBufferManager {
+	
 public:
+	virtual ~CmdLineBufferManager() {};
 	virtual void sendReply(const std::string) = 0;
 	virtual bool processCommandLine(std::string cmdLine, boolCallback_t completion) = 0;
 	virtual stringvector matchesForCmd(const std::string cmd) = 0;

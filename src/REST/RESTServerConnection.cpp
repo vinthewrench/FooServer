@@ -8,6 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <string>
 
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -21,10 +22,10 @@ using namespace nlohmann;
 using namespace std;
 using namespace rest;
 
-static const string HTTPHEADER_JSON  = "Content-Type: application/json\r\n";
-static const string HTTPHEADER_KEEPALIVE  = "Connection: keep-alive\r\n";
-static const string HTTPHEADER_CLOSE  		= "Connection: close\r\n";
-static const string HTTPHEADER_CRLF  		= "\r\n";
+[[clang::no_destroy]] const string HTTPHEADER_JSON  		= "Content-Type: application/json\r\n";
+[[clang::no_destroy]] const string HTTPHEADER_KEEPALIVE  = "Connection: keep-alive\r\n";
+[[clang::no_destroy]] const string HTTPHEADER_CLOSE  		= "Connection: close\r\n";
+[[clang::no_destroy]] const string HTTPHEADER_CRLF  		= "\r\n";
 
 
 // MARK: - http_parser_settings callbacks
@@ -334,6 +335,11 @@ string RESTServerConnection::httpHeaderForStatusCode(httpStatusCodes_t  code){
 		case STATUS_NOT_IMPLEMENTED: header+= "501 - Not Implemented";
 			break;
 
+		case STATUS_UNAVAILABLE: header+= "503 - Service unavailable";
+			break;
+
+
+			
 		case STATUS_INTERNAL_ERROR:;
 		default:
 			header+= "500 - Internal server error";

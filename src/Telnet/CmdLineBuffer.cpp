@@ -668,7 +668,11 @@ bool CmdLineBuffer::append_char(uint8_t c){
 void CmdLineBuffer::delete_char(){
 	if(_dbuf.pos > 0){
 		if(_dbuf.used > 0) {
-			memmove((void*) (_dbuf.data + _dbuf.pos-1) , (_dbuf.data + _dbuf.pos), _dbuf.used -1);
+			
+			if(_dbuf.pos < _dbuf.used) {
+				size_t bytesToMove = _dbuf.used - _dbuf.pos;
+				memmove((void*) (_dbuf.data + _dbuf.pos-1) , (_dbuf.data + _dbuf.pos), bytesToMove);
+			}
 			_dbuf.pos--;
 			_dbuf.used--;
 		}

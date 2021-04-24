@@ -30,6 +30,10 @@ this code
 - Utils.h - Kenneth Perkins
 - date.h - Howard Hinnant
 
+Additional thank you to to: 
+- Asaf Sarid for TCPServer sample,  I used as starting point  
+   https://github.com/asafsarid/TCPServer 
+
 ================================================================================
 
 libtelnet - TELNET protocol handling library

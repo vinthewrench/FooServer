@@ -25,72 +25,63 @@ using namespace std;
 ServerCmdQueue *ServerCmdQueue::sharedInstance = 0;
 
 ServerCmdQueue::ServerCmdQueue() {
-	_cmdHandlers.clear();
+	_nounHandlers.clear();
 };
 
 ServerCmdQueue::~ServerCmdQueue() {
-	_cmdHandlers.clear();
+	_nounHandlers.clear();
 };
 
-bool ServerCmdQueue::registerCommand(	string_view cmd,
-												 cmdHandler_t handler ) {
+bool ServerCmdQueue::registerNoun(	string_view noun,
+											 nounHandler_t handler ) {
 	if(handler)
-		_cmdHandlers.insert( {cmd, handler} );
+		_nounHandlers.insert( {noun, handler} );
 
 	return true;
 }
 
-ServerCmdQueue::cmdHandler_t ServerCmdQueue::handlerForCommand(string cmd){
+ServerCmdQueue::nounHandler_t ServerCmdQueue::handlerForNoun(string noun){
 	
-	cmdHandler_t  handler = NULL;
-	  
-	auto it = _cmdHandlers.find(cmd);
-	if(it != _cmdHandlers.end()){
-			handler = it->second;
+	nounHandler_t  handler = NULL;
+
+	auto it = _nounHandlers.find(noun);
+	if(it != _nounHandlers.end()){
+		handler = it->second;
 	}
 	
-	return handler;
+	
+ 	return handler;
 }
-
-
 
 // MARK: - command management and processing
 
-void ServerCmdQueue::queueCommand(	json request,
-											 TCPClientInfo cInfo,
-											 cmdCallback_t completion ) {
+void ServerCmdQueue::queueRESTCommand(  REST_URL url,
+												  TCPClientInfo cInfo,
+												  cmdCallback_t completion  ) {
 	
 	using namespace rest;
-
- 
 	
-	if(request.contains(kREST_command)
-		&& request.at(kREST_command).is_string()) {
-		string cmd = request.at(kREST_command);
-		
-		cmdHandler_t func = handlerForCommand(cmd);
-		if(func) {
-	 		(func)(this, request, cInfo, completion);
-		}
-		else {
-			json reply;
-			makeStatusJSON(reply,
-								STATUS_NOT_IMPLEMENTED,
-								"Not Implemented",
-								"Lazy Programmer",
-								"Lazy programmer hasn't written code for this yet." );
-
-			(completion) (reply, STATUS_NOT_IMPLEMENTED);
-
-		}
+	nounHandler_t  func = NULL;
+	
+	auto path = url.path();
+	
+	if(path.size() > 0) {
+		string noun = path.at(0);
+		func = handlerForNoun(noun);
 	}
-	else {	// bad command
-		json reply ;
+	
+	if(func) {
+		(func)(this, url, cInfo, completion);
+	}
+	else {
+		json reply;
 		makeStatusJSON(reply,
-							STATUS_BAD_REQUEST,
-							"No Command is specified"
-							);
-		(completion) (reply, STATUS_BAD_REQUEST);
+							STATUS_NOT_IMPLEMENTED,
+							"Not Implemented",
+							"Lazy Programmer",
+							"Lazy programmer hasn't written code for this yet." );
+		
+		(completion) (reply, STATUS_NOT_IMPLEMENTED);
+		
 	}
 }
- 

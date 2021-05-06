@@ -23,6 +23,7 @@
 #include "CommonDefs.hpp"
 #include "RESTutils.hpp"
 #include "TCPClientInfo.hpp"
+#include "REST_URL.hpp"
 
 
 using namespace nlohmann;
@@ -47,22 +48,23 @@ public:
 	typedef std::function<void(	json reply,
 										httpStatusCodes_t code)> cmdCallback_t;
 	
-	void queueCommand(	json command,
-							TCPClientInfo cInfo,
-							cmdCallback_t completion );
+	void queueRESTCommand( REST_URL url,
+								TCPClientInfo cInfo,
+								cmdCallback_t completion );
 
-	
 	typedef std::function<void(ServerCmdQueue* ref,
- 										json request,
+										REST_URL url,
 										TCPClientInfo cInfo,
-										cmdCallback_t completion)> cmdHandler_t;
+										cmdCallback_t completion)> nounHandler_t;
+	bool registerNoun(	string_view noun,
+							nounHandler_t handler = NULL );
 
-	bool registerCommand(	string_view cmd,
-								cmdHandler_t handler = NULL );
+
 private:
 	
-	map<string_view,  	cmdHandler_t> _cmdHandlers;
-	cmdHandler_t 		handlerForCommand(string cmd);
+	map<string_view,  	nounHandler_t> _nounHandlers;
+	nounHandler_t 		handlerForNoun(string noun);
+
 };
 
 #endif /* ServerCmdQueue_hpp */

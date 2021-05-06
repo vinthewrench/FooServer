@@ -64,13 +64,11 @@ public:
 
 	// for subclass
 	virtual void sendString(const std::string) = 0;
-	virtual void queueServerCommand(json cmd, ServerCmdQueue::cmdCallback_t completion );
+	virtual void queueRESTCommand( REST_URL url, ServerCmdQueue::cmdCallback_t completion  );
 
 	// useful but not necessary
 	virtual void closeConnection() = 0;
 	virtual bool isConnected() = 0;
-
-//	virtual struct sockaddr_storage getIpAddr() { return _addr;};
 	
 	ssize_t 			sendData(const void *buffer, size_t length);
 	void 				close();

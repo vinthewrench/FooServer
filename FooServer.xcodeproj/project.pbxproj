@@ -37,6 +37,8 @@
 		2EA7712E261E5E2F00045F27 /* TCPClientInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA77126261E591D00045F27 /* TCPClientInfo.cpp */; };
 		2EA7714F261FBEE000045F27 /* libFOOServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA770C9261E20FC00045F27 /* libFOOServer.a */; };
 		2EA77150261FBEE500045F27 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA770AF261E1FF500045F27 /* main.cpp */; };
+		2EAB077F26420E9A00ABFD77 /* REST_URL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB077D26420E9A00ABFD77 /* REST_URL.cpp */; };
+		2EAB078026420E9A00ABFD77 /* REST_URL.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2EAB077E26420E9A00ABFD77 /* REST_URL.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,6 +73,8 @@
 		2EA770C9261E20FC00045F27 /* libFOOServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFOOServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA77126261E591D00045F27 /* TCPClientInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TCPClientInfo.cpp; sourceTree = "<group>"; };
 		2EA77141261FBEC500045F27 /* FooServerTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FooServerTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EAB077D26420E9A00ABFD77 /* REST_URL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = REST_URL.cpp; sourceTree = "<group>"; };
+		2EAB077E26420E9A00ABFD77 /* REST_URL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = REST_URL.hpp; sourceTree = "<group>"; };
 		2EB3990826053E45003ED779 /* ServerCmdQueue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ServerCmdQueue.cpp; sourceTree = "<group>"; };
 		2EB3990926053E45003ED779 /* ServerCmdQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ServerCmdQueue.hpp; sourceTree = "<group>"; };
 		2EB3990D26054D19003ED779 /* CommonDefs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CommonDefs.hpp; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 			children = (
 				2EFCF46A25FD62CA0048202E /* RESTServerConnection.hpp */,
 				2EFCF46925FD62CA0048202E /* RESTServerConnection.cpp */,
+				2EAB077E26420E9A00ABFD77 /* REST_URL.hpp */,
+				2EAB077D26420E9A00ABFD77 /* REST_URL.cpp */,
 				2E83BB3925FD4C35000B2BA3 /* http_parser.c */,
 				2E83BB3A25FD4C35000B2BA3 /* http_parser.h */,
 				2E83BB3D25FD4EB2000B2BA3 /* yuarel.c */,
@@ -179,8 +185,7 @@
 			children = (
 				2EA770AF261E1FF500045F27 /* main.cpp */,
 			);
-			name = test;
-			path = src/test;
+			path = test;
 			sourceTree = "<group>";
 		};
 		2EA7714E261FBEE000045F27 /* Frameworks */ = {
@@ -197,6 +202,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EAB078026420E9A00ABFD77 /* REST_URL.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +303,7 @@
 				2EA770EF261E214D00045F27 /* CmdLineBuffer.hpp in Sources */,
 				2EA770F0261E214D00045F27 /* CmdLineBuffer.cpp in Sources */,
 				2EA770F1261E214D00045F27 /* libtelnet.c in Sources */,
+				2EAB077F26420E9A00ABFD77 /* REST_URL.cpp in Sources */,
 				2EA770F2261E214D00045F27 /* libtelnet.h in Sources */,
 				2EA770E3261E214600045F27 /* ServerCmdQueue.hpp in Sources */,
 				2EA770E4261E214600045F27 /* ServerCmdQueue.cpp in Sources */,

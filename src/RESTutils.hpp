@@ -13,6 +13,10 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include "http_parser.h"
+
+#include <map>
+
 using namespace nlohmann;
 using namespace std;
 
@@ -22,12 +26,15 @@ typedef enum {
 	STATUS_BAD_REQUEST			= 400,
 	STATUS_ACCESS_DENIED		= 401,
 	STATUS_INVALID_BODY		= 4006,
+	STATUS_NOT_FOUND			= 404,
 	STATUS_INVALID_METHOD		= 405,
 	STATUS_INTERNAL_ERROR		= 500,
 	STATUS_NOT_IMPLEMENTED	= 501,
 	STATUS_UNAVAILABLE		= 503,
  
 }httpStatusCodes_t;
+
+typedef int httpMethods_t;
 
 namespace rest{
  
@@ -54,6 +61,12 @@ namespace rest{
 
 	string IPAddrString(sockaddr_storage addr);
 
+
+/*!
+ Parses the query string of a URL.  word should be the stuff that comes
+ after the ? in the query URL.
+ !*/
+	void parse_query( std::string word, map<string, string>& queries);
 
 };
 

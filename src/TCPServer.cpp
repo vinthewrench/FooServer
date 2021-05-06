@@ -74,12 +74,13 @@ void  TCPServerConnection::close() {
 //	printf("CLOSE %d\n", _fd);
 	_server->close_socket(_fd);
 }
-
-void TCPServerConnection::queueServerCommand(json request,
-														ServerCmdQueue::cmdCallback_t completion ){
-	_cmdQueue->queueCommand(request, _info, completion);
-}
  
+void TCPServerConnection::queueRESTCommand( REST_URL url,
+														 ServerCmdQueue::cmdCallback_t completion  ){
+	_cmdQueue->queueRESTCommand(url, _info, completion);
+	
+}
+
 // MARK: - TCPServer
 
 TCPServer::TCPServer(ServerCmdQueue* cmdQueue) {

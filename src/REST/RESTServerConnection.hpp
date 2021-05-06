@@ -14,6 +14,8 @@
 #include "TCPServer.hpp"
 #include "http_parser.h"
 
+#include "REST_URL.hpp"
+
 class RESTServerConnection : public TCPServerConnection {
 	
 public:
@@ -36,21 +38,11 @@ private:
 	std::string httpHeaderForStatusCode(httpStatusCodes_t code);
 	std::string httpHeaderForContentLength(size_t length);
 
-	bool validateRequestCredentials(json k);
-
-	void processHeaders();
-
-	http_parser 				_parser;
-	http_parser_settings 	_hpCB;
-
-	char* 					_url;		// must dealloc this
-	char* 					_body;		// must dealloc this
-	char*					_currentHeader;
-	
-	map<string, string> _headers;
-	
+	bool validateRequestCredentials();
+ 
+	REST_URL	_rURL;
 	bool					_isOpen;
-	struct Private;
+
 };
 
 #endif /* RESTServerConnection_hpp */

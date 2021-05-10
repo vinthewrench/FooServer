@@ -33,7 +33,6 @@
 		2EA770FB261E215600045F27 /* CommonDefs.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EB3990D26054D19003ED779 /* CommonDefs.hpp */; };
 		2EA770FC261E215600045F27 /* json.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EFCF46025FD57180048202E /* json.hpp */; };
 		2EA770FD261E215600045F27 /* Utils.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6A43D42601139400D8A806 /* Utils.hpp */; };
-		2EA770FE261E215600045F27 /* date.h in Sources */ = {isa = PBXBuildFile; fileRef = 2EF5B4272617E1CD006CC9B5 /* date.h */; };
 		2EA7712E261E5E2F00045F27 /* TCPClientInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA77126261E591D00045F27 /* TCPClientInfo.cpp */; };
 		2EA7714F261FBEE000045F27 /* libFOOServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA770C9261E20FC00045F27 /* libFOOServer.a */; };
 		2EA77150261FBEE500045F27 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA770AF261E1FF500045F27 /* main.cpp */; };
@@ -79,7 +78,6 @@
 		2EB3990926053E45003ED779 /* ServerCmdQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ServerCmdQueue.hpp; sourceTree = "<group>"; };
 		2EB3990D26054D19003ED779 /* CommonDefs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CommonDefs.hpp; sourceTree = "<group>"; };
 		2EF5B41E2617945A006CC9B5 /* TCPClientInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TCPClientInfo.hpp; sourceTree = "<group>"; };
-		2EF5B4272617E1CD006CC9B5 /* date.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = date.h; sourceTree = "<group>"; };
 		2EFCF46025FD57180048202E /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		2EFCF46225FD5D990048202E /* TelnetServerConnection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TelnetServerConnection.cpp; sourceTree = "<group>"; };
 		2EFCF46325FD5D990048202E /* TelnetServerConnection.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TelnetServerConnection.hpp; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 				2EB3990D26054D19003ED779 /* CommonDefs.hpp */,
 				2EFCF46025FD57180048202E /* json.hpp */,
 				2E6A43D42601139400D8A806 /* Utils.hpp */,
-				2EF5B4272617E1CD006CC9B5 /* date.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -293,7 +290,6 @@
 				2EA770FB261E215600045F27 /* CommonDefs.hpp in Sources */,
 				2EA770FC261E215600045F27 /* json.hpp in Sources */,
 				2EA770FD261E215600045F27 /* Utils.hpp in Sources */,
-				2EA770FE261E215600045F27 /* date.h in Sources */,
 				2EA770E9261E214D00045F27 /* TelnetServerConnection.hpp in Sources */,
 				2EA770EA261E214D00045F27 /* TelnetServerConnection.cpp in Sources */,
 				2EA770EB261E214D00045F27 /* CmdLineRegistry.hpp in Sources */,

@@ -34,23 +34,9 @@
 		2EA770FC261E215600045F27 /* json.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EFCF46025FD57180048202E /* json.hpp */; };
 		2EA770FD261E215600045F27 /* Utils.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6A43D42601139400D8A806 /* Utils.hpp */; };
 		2EA7712E261E5E2F00045F27 /* TCPClientInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA77126261E591D00045F27 /* TCPClientInfo.cpp */; };
-		2EA7714F261FBEE000045F27 /* libFOOServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EA770C9261E20FC00045F27 /* libFOOServer.a */; };
-		2EA77150261FBEE500045F27 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA770AF261E1FF500045F27 /* main.cpp */; };
 		2EAB077F26420E9A00ABFD77 /* REST_URL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB077D26420E9A00ABFD77 /* REST_URL.cpp */; };
 		2EAB078026420E9A00ABFD77 /* REST_URL.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2EAB077E26420E9A00ABFD77 /* REST_URL.hpp */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		2EA7713F261FBEC500045F27 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2E6A43D42601139400D8A806 /* Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
@@ -68,10 +54,8 @@
 		2EA770A3261CB4D800045F27 /* CmdLineRegistry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CmdLineRegistry.hpp; sourceTree = "<group>"; };
 		2EA770A7261E16F900045F27 /* RESTutils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RESTutils.cpp; sourceTree = "<group>"; };
 		2EA770A8261E16F900045F27 /* RESTutils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RESTutils.hpp; sourceTree = "<group>"; };
-		2EA770AF261E1FF500045F27 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = test/main.cpp; sourceTree = SOURCE_ROOT; };
 		2EA770C9261E20FC00045F27 /* libFOOServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFOOServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA77126261E591D00045F27 /* TCPClientInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TCPClientInfo.cpp; sourceTree = "<group>"; };
-		2EA77141261FBEC500045F27 /* FooServerTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FooServerTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EAB077D26420E9A00ABFD77 /* REST_URL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = REST_URL.cpp; sourceTree = "<group>"; };
 		2EAB077E26420E9A00ABFD77 /* REST_URL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = REST_URL.hpp; sourceTree = "<group>"; };
 		2EB3990826053E45003ED779 /* ServerCmdQueue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ServerCmdQueue.cpp; sourceTree = "<group>"; };
@@ -92,14 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2EA7713E261FBEC500045F27 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2EA7714F261FBEE000045F27 /* libFOOServer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +117,6 @@
 		2E83BB1B25FC26A6000B2BA3 = {
 			isa = PBXGroup;
 			children = (
-				2EA770AD261E1FC500045F27 /* test */,
 				2E83BB2625FC26A6000B2BA3 /* src */,
 				2E83BB2525FC26A6000B2BA3 /* Products */,
 				2EA7714E261FBEE000045F27 /* Frameworks */,
@@ -152,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				2EA770C9261E20FC00045F27 /* libFOOServer.a */,
-				2EA77141261FBEC500045F27 /* FooServerTest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -175,14 +149,6 @@
 				2E6A43D42601139400D8A806 /* Utils.hpp */,
 			);
 			path = src;
-			sourceTree = "<group>";
-		};
-		2EA770AD261E1FC500045F27 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				2EA770AF261E1FF500045F27 /* main.cpp */,
-			);
-			path = test;
 			sourceTree = "<group>";
 		};
 		2EA7714E261FBEE000045F27 /* Frameworks */ = {
@@ -223,23 +189,6 @@
 			productReference = 2EA770C9261E20FC00045F27 /* libFOOServer.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		2EA77140261FBEC500045F27 /* FooServerTest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2EA77145261FBEC500045F27 /* Build configuration list for PBXNativeTarget "FooServerTest" */;
-			buildPhases = (
-				2EA7713D261FBEC500045F27 /* Sources */,
-				2EA7713E261FBEC500045F27 /* Frameworks */,
-				2EA7713F261FBEC500045F27 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = FooServerTest;
-			productName = FooServerTest;
-			productReference = 2EA77141261FBEC500045F27 /* FooServerTest */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -249,9 +198,6 @@
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					2EA770C8261E20FC00045F27 = {
-						CreatedOnToolsVersion = 12.4;
-					};
-					2EA77140261FBEC500045F27 = {
 						CreatedOnToolsVersion = 12.4;
 					};
 				};
@@ -270,7 +216,6 @@
 			projectRoot = "";
 			targets = (
 				2EA770C8261E20FC00045F27 /* FOOServer */,
-				2EA77140261FBEC500045F27 /* FooServerTest */,
 			);
 		};
 /* End PBXProject section */
@@ -308,14 +253,6 @@
 				2EA770DC261E213B00045F27 /* TCPServer.cpp in Sources */,
 				2EA770DD261E213B00045F27 /* RESTutils.hpp in Sources */,
 				2EA770DE261E213B00045F27 /* RESTutils.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2EA7713D261FBEC500045F27 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2EA77150261FBEE500045F27 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,30 +400,6 @@
 			};
 			name = Release;
 		};
-		2EA77146261FBEC500045F27 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PDXWT4JFG9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				HEADER_SEARCH_PATHS = "src/**";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		2EA77147261FBEC500045F27 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PDXWT4JFG9;
-				ENABLE_HARDENED_RUNTIME = YES;
-				HEADER_SEARCH_PATHS = "src/**";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -504,15 +417,6 @@
 			buildConfigurations = (
 				2EA770CB261E20FC00045F27 /* Debug */,
 				2EA770CC261E20FC00045F27 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2EA77145261FBEC500045F27 /* Build configuration list for PBXNativeTarget "FooServerTest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2EA77146261FBEC500045F27 /* Debug */,
-				2EA77147261FBEC500045F27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

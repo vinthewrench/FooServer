@@ -116,6 +116,9 @@ string RESTServerConnection::httpHeaderForStatusCode(httpStatusCodes_t  code){
 		case STATUS_NO_CONTENT: header+= "204 - No Content";
 			break;
 			
+		case STATUS_NOT_MODIFIED: header+= "304 - Not Modified";
+			break;
+	
 		case STATUS_ACCESS_DENIED: header+= "401 - Access denied";
 			break;
 			

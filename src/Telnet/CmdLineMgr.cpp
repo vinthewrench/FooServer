@@ -104,6 +104,20 @@ bool CmdLineMgr::processCommandLine(std::string cmdLine, boolCallback_t completi
 	return shouldRecordInHistory;
 }
 
+void CmdLineMgr::helpForCommandLine(std::string cmdLine, boolCallback_t completion){
+	
+	if(!_server->isConnected())
+		return;
+ 
+	vector<string> v = split<string>(cmdLine, " ");
+
+	doHelp(v);
+	
+	clear();
+	completion(true);
+ 
+}
+
 
 void CmdLineMgr::registerBuiltInCommands(){
 	
@@ -139,8 +153,7 @@ void CmdLineMgr::registerBuiltInCommands(){
 	reg->registerCommand("help", [=](stringvector line,
 												CmdLineMgr* mgr,
 												boolCallback_t cb){
-		mgr->sendReply("  No Help yet..\r\n");
-		
+		mgr->doHelp(line);		
 		(cb) (true);
 		return false;
 	});
@@ -210,6 +223,14 @@ void CmdLineMgr::doFinger(stringvector params){
 	sendReply(oss.str());
 }
  
+void CmdLineMgr::doHelp(stringvector params){
+ 
+	CmdLineRegistry* reg = CmdLineRegistry::shared();
+
+	auto helpStr = reg->helpForCmd(params);
+
+	sendReply(helpStr);
+}
 
 
 // MARK: - wrappers for TCPServerConnection

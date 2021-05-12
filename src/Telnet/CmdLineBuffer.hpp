@@ -23,6 +23,7 @@ public:
 	virtual void sendReply(const std::string) = 0;
 	virtual bool processCommandLine(std::string cmdLine, boolCallback_t completion) = 0;
 	virtual stringvector matchesForCmd(const std::string cmd) = 0;
+	virtual void helpForCommandLine(std::string cmdLine, boolCallback_t cb) = 0;
 };
 
  class CmdLineBuffer {
@@ -63,6 +64,7 @@ private:
 	static const uint8_t CHAR_TAB       = 0x09;
 	static const uint8_t CHAR_DEL       = 0x7F;
 	static const uint8_t CHAR_ESC     	 = 0x1B;
+	static const uint8_t CHAR_QUESTION   = '?';
 
 	static const uint8_t CHAR_CNTL_A     	 = 0x01;		// begining of line
 	static const uint8_t CHAR_CNTL_E     	 = 0x05;		// end of line
@@ -96,6 +98,7 @@ private:
 	void handleBeginingOfLine();
 	void handleEndOfLine();
 	void handleClearToEndOfLine();
+	void handleHelp();
 
 	void displayHistoryLine();
 

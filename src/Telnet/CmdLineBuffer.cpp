@@ -108,10 +108,10 @@ void CmdLineBuffer::processChar(uint8_t ch){
 	switch (_state) {
 			
 		case CLB_READY:{
-	
+			
 			if(ch != CHAR_TAB && _displayingCompletionOptions)
 				removeCompletions()	;
-
+			
 			if(ch == CHAR_ESC ) {
 				_state = CLB_ESC;
 				
@@ -130,14 +130,14 @@ void CmdLineBuffer::processChar(uint8_t ch){
 			} else if(ch == CHAR_CNTL_A) {
 				maybeCopyHistoryToBuffer();
 				handleBeginingOfLine();
-	
+				
 			} else if(ch == CHAR_CNTL_E) {
 				maybeCopyHistoryToBuffer();
- 				handleEndOfLine();
-
+				handleEndOfLine();
+				
 			} else if(ch == CHAR_CNTL_K) {
 				maybeCopyHistoryToBuffer();
- 				handleClearToEndOfLine();
+				handleClearToEndOfLine();
 				
 			} else if(ch == CHAR_BS ) {
 				maybeCopyHistoryToBuffer();
@@ -146,12 +146,15 @@ void CmdLineBuffer::processChar(uint8_t ch){
 			}else if(ch == CHAR_CR  ) {
 				processBuffer();
 			}
+			else if(ch == CHAR_QUESTION  ) {
+				handleHelp();
+			}
 			else if(ch > CHAR_PRINTABLE){
 				maybeCopyHistoryToBuffer();
 				if(_dbuf.pos < _dbuf.used) {
 					append_char(ch);
 					sendReply("\x1B[4h"  + string(1, ch) + "\x1B[4l");
-	 			}
+				}
 				else {
 					append_char(ch);
 					sendReply(string(1, ch));
@@ -295,7 +298,6 @@ void CmdLineBuffer::handleFwdArrow(){
 	}
 
 }
- 
 
 void CmdLineBuffer::processBuffer(){
 	
@@ -329,6 +331,35 @@ void CmdLineBuffer::processBuffer(){
 		storeCmdInHistory(cmdString);
 	}
 }
+
+// MARK: - help
+
+
+void CmdLineBuffer::handleHelp(){
+// 
+//	std::vector<std::string> options;
+//
+//  options = _clMgr->matchesForCmd(string((char*)_dbuf.data, _dbuf.used));
+//
+//	if(options.size() > 1) {
+//		
+//	}
+		
+  removeCompletions();
+  
+  string cmdString((char*)_dbuf.data, _dbuf.used);
+  cmdString = Utils::trimEnd(cmdString);
+  cmdString = Utils::trimStart(cmdString);
+  
+  clear();  // clear the buffer
+  
+  // pass it back to the CmdLineMgr
+  _clMgr->helpForCommandLine(cmdString, [=](bool didSucceed){
+	  sendReply(STR_PROMPT);
+	  
+  });
+}
+
 
 // MARK: - wrapper to CmdLineMgr
 

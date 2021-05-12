@@ -38,6 +38,8 @@ public:
 	// calls from CmdLineBufferManager
 	virtual bool processCommandLine(std::string cmdLine, boolCallback_t cb);
 	virtual stringvector matchesForCmd(const std::string cmd);
+	virtual void helpForCommandLine(std::string cmdLine, boolCallback_t cb);
+
 	
 	//convenience wrappers to TCPServerConnection
 	void sendReply(std::string reply);
@@ -50,7 +52,8 @@ private:
 	// built in commands
 	void doWhatIsMyIP(stringvector params);
 	void doFinger(stringvector params);
-
+	void doHelp(stringvector params);
+	
 	TCPServerConnection*	_server;
 	CmdLineBuffer 			_cmdLineBuffer;
 };

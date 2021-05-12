@@ -48,7 +48,9 @@ public:
 	vector<string> matchesForCmd( const string cmd);
 
 	cmdHandler_t handlerForCmd( const string cmd);
-	
+
+	bool setHelpFile(const string path );
+	string helpForCmd( stringvector params);
 	
 protected:
 

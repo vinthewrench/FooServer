@@ -4,6 +4,9 @@
 //
 //  Created by Vincent Moscaritolo on 4/6/21.
 //
+#include <sstream>
+#include <iostream>
+#include <iomanip>
 
 #include "CmdLineRegistry.hpp"
 
@@ -71,4 +74,32 @@ CmdLineRegistry::cmdHandler_t CmdLineRegistry::handlerForCmd( const string cmd){
 	}
 	
 	return func;
+}
+
+// MARK: - help
+
+bool CmdLineRegistry::setHelpFile(const string path ){
+	return true;
+}
+
+string CmdLineRegistry::helpForCmd( stringvector params){
+	
+	std::ostringstream oss;
+
+	oss << " ?\r\n";
+
+	if(params.size() == 0){
+		// do generic help
+		oss << " No help \r\n";
+
+	}
+	else {
+	string cmd = params.at(0);
+	std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::tolower);
+		
+	oss << " No help  str\r\n";
+
+		// do help for command
+	}
+	return oss.str();
 }

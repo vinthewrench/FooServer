@@ -157,6 +157,7 @@ void REST_URL::commonInit() {
  	_currentHeader = NULL;
 	_headers.clear();
 	_completion = NULL;
+	_valid = false;
 
 	_parser.data = (void*)this;
 	http_parser_init(&_parser, HTTP_REQUEST);

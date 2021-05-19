@@ -36,6 +36,8 @@
 		2EA7712E261E5E2F00045F27 /* TCPClientInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA77126261E591D00045F27 /* TCPClientInfo.cpp */; };
 		2EAB077F26420E9A00ABFD77 /* REST_URL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EAB077D26420E9A00ABFD77 /* REST_URL.cpp */; };
 		2EAB078026420E9A00ABFD77 /* REST_URL.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2EAB077E26420E9A00ABFD77 /* REST_URL.hpp */; };
+		2EC68B27264DA1B600541251 /* CmdLineHelp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EC68B25264DA1B600541251 /* CmdLineHelp.cpp */; };
+		2EC68B28264DA1B600541251 /* CmdLineHelp.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2EC68B26264DA1B600541251 /* CmdLineHelp.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		2EB3990826053E45003ED779 /* ServerCmdQueue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ServerCmdQueue.cpp; sourceTree = "<group>"; };
 		2EB3990926053E45003ED779 /* ServerCmdQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ServerCmdQueue.hpp; sourceTree = "<group>"; };
 		2EB3990D26054D19003ED779 /* CommonDefs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CommonDefs.hpp; sourceTree = "<group>"; };
+		2EC68B25264DA1B600541251 /* CmdLineHelp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CmdLineHelp.cpp; sourceTree = "<group>"; };
+		2EC68B26264DA1B600541251 /* CmdLineHelp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CmdLineHelp.hpp; sourceTree = "<group>"; };
 		2EF5B41E2617945A006CC9B5 /* TCPClientInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TCPClientInfo.hpp; sourceTree = "<group>"; };
 		2EFCF46025FD57180048202E /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		2EFCF46225FD5D990048202E /* TelnetServerConnection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TelnetServerConnection.cpp; sourceTree = "<group>"; };
@@ -93,6 +97,8 @@
 				2E6A43D62601779600D8A806 /* CmdLineMgr.cpp */,
 				2EFCF4A525FEC7560048202E /* CmdLineBuffer.hpp */,
 				2EFCF4A425FEC7560048202E /* CmdLineBuffer.cpp */,
+				2EC68B26264DA1B600541251 /* CmdLineHelp.hpp */,
+				2EC68B25264DA1B600541251 /* CmdLineHelp.cpp */,
 				2E83BB3325FC29B2000B2BA3 /* libtelnet.c */,
 				2E83BB3425FC29B2000B2BA3 /* libtelnet.h */,
 			);
@@ -165,6 +171,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EC68B28264DA1B600541251 /* CmdLineHelp.hpp in Headers */,
 				2EAB078026420E9A00ABFD77 /* REST_URL.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,6 +237,7 @@
 				2EA770F7261E215600045F27 /* http_parser.c in Sources */,
 				2EA770F8261E215600045F27 /* http_parser.h in Sources */,
 				2EA770F9261E215600045F27 /* yuarel.c in Sources */,
+				2EC68B27264DA1B600541251 /* CmdLineHelp.cpp in Sources */,
 				2EA7712E261E5E2F00045F27 /* TCPClientInfo.cpp in Sources */,
 				2EA770FA261E215600045F27 /* yuarel.h in Sources */,
 				2EA770FB261E215600045F27 /* CommonDefs.hpp in Sources */,
@@ -373,7 +381,7 @@
 		2EA770CB261E20FC00045F27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PDXWT4JFG9;
@@ -388,7 +396,7 @@
 		2EA770CC261E20FC00045F27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PDXWT4JFG9;

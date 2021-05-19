@@ -6,6 +6,8 @@
 //
 
 #include "CmdLineMgr.hpp"
+#include "CmdLineHelp.hpp"
+
 #include <iostream>
 #include <regex>
 #include <sstream>

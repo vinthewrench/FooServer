@@ -9,6 +9,7 @@
 #include <iomanip>
 
 #include "CmdLineRegistry.hpp"
+#include "CmdLineHelp.hpp"
 
 CmdLineRegistry *CmdLineRegistry::sharedInstance = 0;
 
@@ -78,28 +79,29 @@ CmdLineRegistry::cmdHandler_t CmdLineRegistry::handlerForCmd( const string cmd){
 
 // MARK: - help
 
-bool CmdLineRegistry::setHelpFile(const string path ){
-	return true;
-}
-
 string CmdLineRegistry::helpForCmd( stringvector params){
 	
 	std::ostringstream oss;
-
-	oss << " ?\r\n";
-
+		
 	if(params.size() == 0){
 		// do generic help
-		oss << " No help \r\n";
-
+		
+		auto str = CmdLineHelp::shared()->helpForCmd("");
+ 		oss << " ?\r\n" << str << "\r\n";
 	}
 	else {
-	string cmd = params.at(0);
-	std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::tolower);
 		
-	oss << " No help  str\r\n";
-
-		// do help for command
-	}
+		string cmd = params.at(0);
+		std::transform(cmd.begin(), cmd.end(), cmd.begin(), ::tolower);
+		
+		if(cmd == "help"){
+ 			auto str = CmdLineHelp::shared()->helpForCmd(params.size() >1?params.at(1):"");
+			oss << "\r\n" << str << "\r\n";
+		}
+		else {
+			auto str = CmdLineHelp::shared()->helpForCmd(cmd);
+			oss << " ?\r\n" << str << "\r\n";
+		}
+ 	}
 	return oss.str();
 }

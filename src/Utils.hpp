@@ -115,7 +115,7 @@ inline bool caseInSensStringCompare(std::string str1, std::string str2)
 
 
 template <class T, class T2 = typename std::enable_if<std::is_integral<T>::value>::type>
-static std::string to_hex(const T & data, bool addPrefix = true);
+static std::string to_hex(const T & data, bool addPrefix = false);
  
 /*
 template<class T, class>

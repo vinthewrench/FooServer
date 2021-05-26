@@ -130,6 +130,9 @@ string RESTServerConnection::httpHeaderForStatusCode(httpStatusCodes_t  code){
 	 
 		case STATUS_INVALID_BODY: header+= "400.6 - Invalid Request Body";
 			break;
+	
+		case STATUS_CONFLICT: header+= "409 - Conflict";
+			break;
 			
 		case STATUS_INVALID_METHOD: header+= "405 - Method Not Allowed";
 			break;

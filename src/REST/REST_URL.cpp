@@ -55,7 +55,8 @@ struct REST_URL::Private
 	
 		count  = yuarel_parse_query(url.query, '&', params, maxqueries);
 		while (count -- > 0) {
-			rs->_queries[string(params[count].key)] = string(params[count].val);
+			string  val =  (params[count].val != NULL)?string(params[count].val):"";
+			rs->_queries[string(params[count].key)] = val;
 		}
 	
 		rs->_valid = true;

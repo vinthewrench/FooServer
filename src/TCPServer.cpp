@@ -87,6 +87,7 @@ TCPServer::TCPServer(ServerCmdQueue* cmdQueue) {
 	_cmdQueue = cmdQueue;
 	_running = false;
 	_entryCnt = 0;
+	_localHostOnly = true;
 	_connections.clear();
 }
 

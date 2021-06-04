@@ -15,6 +15,9 @@
 #include "yuarel.h"
 #include "json.hpp"
 
+#include "sha256.h"
+#include "hmac.h"
+#include "hash.h"
 #include "RESTServerConnection.hpp"
  #include "TCPClientInfo.hpp"
 

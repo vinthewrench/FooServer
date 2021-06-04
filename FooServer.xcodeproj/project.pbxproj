@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E6ADB2A266ACCAB00E14B8C /* sha256.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB18266ACC9000E14B8C /* sha256.h */; };
+		2E6ADB2C266ACCB500E14B8C /* sha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6ADB1D266ACC9000E14B8C /* sha1.cpp */; };
+		2E6ADB2D266ACCB500E14B8C /* hmac.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB20266ACC9000E14B8C /* hmac.h */; };
+		2E6ADB2E266ACCB500E14B8C /* keccak.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB21266ACC9000E14B8C /* keccak.h */; };
+		2E6ADB2F266ACCB500E14B8C /* sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6ADB22266ACC9000E14B8C /* sha256.cpp */; };
+		2E6ADB30266ACCB500E14B8C /* sha1.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB23266ACC9000E14B8C /* sha1.h */; };
+		2E6ADB31266ACCB500E14B8C /* keccak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6ADB24266ACC9000E14B8C /* keccak.cpp */; };
+		2E6ADB32266ACCB500E14B8C /* hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB26266ACC9000E14B8C /* hash.h */; };
+		2E6ADB33266ACCB500E14B8C /* sha3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6ADB1E266ACC9000E14B8C /* sha3.cpp */; };
+		2E6ADB35266ACCBC00E14B8C /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB15266ACC9000E14B8C /* sha3.h */; };
 		2EA770DB261E213B00045F27 /* TCPServer.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E83BB3025FC26EB000B2BA3 /* TCPServer.hpp */; };
 		2EA770DC261E213B00045F27 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E83BB2F25FC26EB000B2BA3 /* TCPServer.cpp */; };
 		2EA770DD261E213B00045F27 /* RESTutils.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA770A8261E16F900045F27 /* RESTutils.hpp */; };
@@ -44,6 +54,26 @@
 		2E6A43D42601139400D8A806 /* Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utils.hpp; sourceTree = "<group>"; };
 		2E6A43D62601779600D8A806 /* CmdLineMgr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CmdLineMgr.cpp; sourceTree = "<group>"; };
 		2E6A43D72601779600D8A806 /* CmdLineMgr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CmdLineMgr.hpp; sourceTree = "<group>"; };
+		2E6ADB12266ACC9000E14B8C /* digest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = digest.cpp; sourceTree = "<group>"; };
+		2E6ADB13266ACC9000E14B8C /* md5.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = md5.cpp; sourceTree = "<group>"; };
+		2E6ADB14266ACC9000E14B8C /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		2E6ADB15266ACC9000E14B8C /* sha3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha3.h; sourceTree = "<group>"; };
+		2E6ADB16266ACC9000E14B8C /* md5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		2E6ADB17266ACC9000E14B8C /* crc32.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = crc32.cpp; sourceTree = "<group>"; };
+		2E6ADB18266ACC9000E14B8C /* sha256.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha256.h; sourceTree = "<group>"; };
+		2E6ADB1A266ACC9000E14B8C /* github-issue2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "github-issue2.cpp"; sourceTree = "<group>"; };
+		2E6ADB1B266ACC9000E14B8C /* github-issue6.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "github-issue6.cpp"; sourceTree = "<group>"; };
+		2E6ADB1C266ACC9000E14B8C /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		2E6ADB1D266ACC9000E14B8C /* sha1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sha1.cpp; sourceTree = "<group>"; };
+		2E6ADB1E266ACC9000E14B8C /* sha3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sha3.cpp; sourceTree = "<group>"; };
+		2E6ADB1F266ACC9000E14B8C /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		2E6ADB20266ACC9000E14B8C /* hmac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		2E6ADB21266ACC9000E14B8C /* keccak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = keccak.h; sourceTree = "<group>"; };
+		2E6ADB22266ACC9000E14B8C /* sha256.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sha256.cpp; sourceTree = "<group>"; };
+		2E6ADB23266ACC9000E14B8C /* sha1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		2E6ADB24266ACC9000E14B8C /* keccak.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = keccak.cpp; sourceTree = "<group>"; };
+		2E6ADB25266ACC9000E14B8C /* crc32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crc32.h; sourceTree = "<group>"; };
+		2E6ADB26266ACC9000E14B8C /* hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		2E83BB2F25FC26EB000B2BA3 /* TCPServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TCPServer.cpp; sourceTree = "<group>"; };
 		2E83BB3025FC26EB000B2BA3 /* TCPServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TCPServer.hpp; sourceTree = "<group>"; };
 		2E83BB3325FC29B2000B2BA3 /* libtelnet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libtelnet.c; sourceTree = "<group>"; };
@@ -120,6 +150,41 @@
 			path = REST;
 			sourceTree = "<group>";
 		};
+		2E6ADB11266ACC9000E14B8C /* hash-library */ = {
+			isa = PBXGroup;
+			children = (
+				2E6ADB12266ACC9000E14B8C /* digest.cpp */,
+				2E6ADB13266ACC9000E14B8C /* md5.cpp */,
+				2E6ADB14266ACC9000E14B8C /* LICENSE */,
+				2E6ADB15266ACC9000E14B8C /* sha3.h */,
+				2E6ADB16266ACC9000E14B8C /* md5.h */,
+				2E6ADB17266ACC9000E14B8C /* crc32.cpp */,
+				2E6ADB18266ACC9000E14B8C /* sha256.h */,
+				2E6ADB19266ACC9000E14B8C /* tests */,
+				2E6ADB1D266ACC9000E14B8C /* sha1.cpp */,
+				2E6ADB1E266ACC9000E14B8C /* sha3.cpp */,
+				2E6ADB1F266ACC9000E14B8C /* readme.md */,
+				2E6ADB20266ACC9000E14B8C /* hmac.h */,
+				2E6ADB21266ACC9000E14B8C /* keccak.h */,
+				2E6ADB22266ACC9000E14B8C /* sha256.cpp */,
+				2E6ADB23266ACC9000E14B8C /* sha1.h */,
+				2E6ADB24266ACC9000E14B8C /* keccak.cpp */,
+				2E6ADB25266ACC9000E14B8C /* crc32.h */,
+				2E6ADB26266ACC9000E14B8C /* hash.h */,
+			);
+			path = "hash-library";
+			sourceTree = "<group>";
+		};
+		2E6ADB19266ACC9000E14B8C /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				2E6ADB1A266ACC9000E14B8C /* github-issue2.cpp */,
+				2E6ADB1B266ACC9000E14B8C /* github-issue6.cpp */,
+				2E6ADB1C266ACC9000E14B8C /* tests.cpp */,
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
 		2E83BB1B25FC26A6000B2BA3 = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +205,7 @@
 		2E83BB2625FC26A6000B2BA3 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				2E6ADB11266ACC9000E14B8C /* hash-library */,
 				2EB3990926053E45003ED779 /* ServerCmdQueue.hpp */,
 				2EB3990826053E45003ED779 /* ServerCmdQueue.cpp */,
 				2EF5B41E2617945A006CC9B5 /* TCPClientInfo.hpp */,
@@ -172,7 +238,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EC68B28264DA1B600541251 /* CmdLineHelp.hpp in Headers */,
+				2E6ADB30266ACCB500E14B8C /* sha1.h in Headers */,
+				2E6ADB32266ACCB500E14B8C /* hash.h in Headers */,
+				2E6ADB35266ACCBC00E14B8C /* sha3.h in Headers */,
+				2E6ADB2D266ACCB500E14B8C /* hmac.h in Headers */,
 				2EAB078026420E9A00ABFD77 /* REST_URL.hpp in Headers */,
+				2E6ADB2E266ACCB500E14B8C /* keccak.h in Headers */,
+				2E6ADB2A266ACCAB00E14B8C /* sha256.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +312,7 @@
 				2EC68B27264DA1B600541251 /* CmdLineHelp.cpp in Sources */,
 				2EA7712E261E5E2F00045F27 /* TCPClientInfo.cpp in Sources */,
 				2EA770FA261E215600045F27 /* yuarel.h in Sources */,
+				2E6ADB2C266ACCB500E14B8C /* sha1.cpp in Sources */,
 				2EA770FB261E215600045F27 /* CommonDefs.hpp in Sources */,
 				2EA770FC261E215600045F27 /* json.hpp in Sources */,
 				2EA770FD261E215600045F27 /* Utils.hpp in Sources */,
@@ -254,13 +327,16 @@
 				2EA770F1261E214D00045F27 /* libtelnet.c in Sources */,
 				2EAB077F26420E9A00ABFD77 /* REST_URL.cpp in Sources */,
 				2EA770F2261E214D00045F27 /* libtelnet.h in Sources */,
+				2E6ADB33266ACCB500E14B8C /* sha3.cpp in Sources */,
 				2EA770E3261E214600045F27 /* ServerCmdQueue.hpp in Sources */,
 				2EA770E4261E214600045F27 /* ServerCmdQueue.cpp in Sources */,
 				2EA770E6261E214600045F27 /* TCPClientInfo.hpp in Sources */,
 				2EA770DB261E213B00045F27 /* TCPServer.hpp in Sources */,
 				2EA770DC261E213B00045F27 /* TCPServer.cpp in Sources */,
 				2EA770DD261E213B00045F27 /* RESTutils.hpp in Sources */,
+				2E6ADB31266ACCB500E14B8C /* keccak.cpp in Sources */,
 				2EA770DE261E213B00045F27 /* RESTutils.cpp in Sources */,
+				2E6ADB2F266ACCB500E14B8C /* sha256.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

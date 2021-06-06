@@ -56,14 +56,22 @@ public:
 										REST_URL url,
 										TCPClientInfo cInfo,
 										cmdCallback_t completion)> nounHandler_t;
+	
 	bool registerNoun(	string_view noun,
 							nounHandler_t handler = NULL );
 
+	bool apiSecretCreate(string APIkey, string APISecret);
+	bool apiSecretDelete(string APIkey);
+	bool apiSecretGetSecret(string APIkey, string &APISecret);
+	bool apiSecretLoad();
+	bool apiSecretSave();
 
 private:
 	
 	map<string_view,  	nounHandler_t> _nounHandlers;
 	nounHandler_t 		handlerForNoun(string noun);
+
+	map<string,  string> _APISecrets;
 
 };
 

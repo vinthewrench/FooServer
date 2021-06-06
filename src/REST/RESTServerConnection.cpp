@@ -31,14 +31,13 @@ using namespace rest;
 [[clang::no_destroy]] const string HTTPHEADER_CRLF  		= "\r\n";
 
 
-
-
 // MARK: - RESTServerConnection
 
 RESTServerConnection::RESTServerConnection()
 :TCPServerConnection(TCPClientInfo::CLIENT_REST, "REST"){
 
 	_isOpen = false;
+	_shouldAuthenticate = true;
 	
 	_rURL.setCallBack([=] (){
 		
@@ -52,7 +51,8 @@ RESTServerConnection::RESTServerConnection()
 		
 		auto body = _rURL.body();
 		
-		if(validateRequestCredentials()){
+		if( _shouldAuthenticate == false 
+			|| validateRequestCredentials()){
 			
 			queueRESTCommand(_rURL, [=] (json rp, httpStatusCodes_t code){
 				
@@ -103,7 +103,7 @@ void RESTServerConnection::willClose() {
 
 void RESTServerConnection::didRecvData(const void *buffer, size_t length){
 
-  	_rURL.processData((const char*) buffer, length);
+  	_rURL.processData((const char*) buffer, length, true);
 }
 
 
@@ -164,16 +164,55 @@ string RESTServerConnection::httpHeaderForContentLength(size_t length){
 
 // MARK:  - RESTServerConnection security
 
+
+ 
 bool RESTServerConnection::validateRequestCredentials(){
 	
- 		auto headers =  _rURL.headers();
-		
-		// here is where you check your headers..
-		// see https://github.com/System-Glitch/SHA256
-		if(headers.count("Authorization"))
-			return false;
-			
- 	return true;
+	string authString;
+	string timeString;
+	string authKey;
+	string urlPath;
+	string http_method;
+	string APISecret;
+	
+	if(_rURL.headers().count("Authorization"))
+		authString  = _rURL.headers().at("Authorization");
+	
+	if(_rURL.headers().count("X-auth-date"))
+		timeString =  _rURL.headers().at("X-auth-date");
+	
+	// get the user/ApI KEY
+	if(_rURL.headers().count("X-auth-key"))
+		authKey =  _rURL.headers().at("X-auth-key");
+	
+	http_method = string(http_method_str(_rURL.method()));
+	
+	for(auto str : _rURL.path())
+		urlPath += "/" + str;
+	
+	// check the time string  -   must be within a 5 minute window.
+	const time_t quantum = 5;
+	const time_t SECS_PER_MIN =  ((time_t)(60UL));
+	
+	time_t requestTime  = (time_t) atoll(timeString.c_str());
+	time_t now = time(NULL);
+	time_t diff = abs(requestTime - now);
+	
+	if(diff > SECS_PER_MIN * quantum)
+		return false;
+	
+	string stringToSign = http_method  + "|" + urlPath
+	+ "|" + _rURL.bodyHash()  + "|" + timeString
+	+ "|" + authKey;
+	
+	
+	if(! getAPISecret(authKey, APISecret))
+		return false;
+	
+	string hmacStr = 	hmac<SHA256> (stringToSign, "12345");
+	
+	return  authString == hmacStr;
+	
 }
  
 

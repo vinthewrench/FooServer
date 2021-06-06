@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include "yuarel.h"
+#include "sha256.h"
+#include "hmac.h"
 
 using namespace nlohmann;
 using namespace std;
@@ -34,10 +36,25 @@ struct REST_URL::Private
 		yuarel_parse(&url, rs->_urlBytes);
 		
 		rs->_method = (enum http_method) _parser->method;
-	 
-		if(rs->_bodyBytes){
-			rs->_body = json::parse(string(rs->_bodyBytes));
+ 
+		if(rs->_calculateHash){
+			SHA256 hash;
+			
+			if(rs->_bodyBytes && strlen(rs->_bodyBytes)){
+				hash.add(rs->_bodyBytes, strlen(rs->_bodyBytes));
+			}
+			else
+			{
+				string empty;
+				hash.add(&empty[0], empty.size());
+			}
+			rs->_bodyHashHex = hash.getHash();
+			
+			hash.reset();
 		}
+
+		if(rs->_bodyBytes)
+			rs->_body = json::parse(string(rs->_bodyBytes));
 
 		string query = url.query?string(url.query):string();
 		std::transform(query.begin(), query.end(), query.begin(), ::tolower);
@@ -67,10 +84,10 @@ struct REST_URL::Private
 			rs->_urlBytes = NULL;
 		  }
 		  
-		  if(rs->_bodyBytes){
-			  free(rs->_bodyBytes);
-			  rs->_bodyBytes = NULL;
-		  }
+		if(rs->_bodyBytes){
+			free(rs->_bodyBytes);
+			rs->_bodyBytes = NULL;
+		}
 		
 		if(rs->_currentHeader){
 			free(rs->_currentHeader);
@@ -159,7 +176,8 @@ void REST_URL::commonInit() {
 	_headers.clear();
 	_completion = NULL;
 	_valid = false;
-
+	_bodyHashHex.clear();
+	
 	_parser.data = (void*)this;
 	http_parser_init(&_parser, HTTP_REQUEST);
 }
@@ -175,8 +193,9 @@ void REST_URL::clear(){
 		  free(_bodyBytes);
 		  _bodyBytes = NULL;
 	  }
-	
-	if(_currentHeader){
+	_bodyHashHex.clear();
+
+ 	if(_currentHeader){
 		free(_currentHeader);
 		_currentHeader = NULL;
 	}
@@ -204,8 +223,9 @@ REST_URL::~REST_URL(){
 }
 
 
-size_t REST_URL::processData(const void *buffer, size_t length){
+size_t REST_URL::processData(const void *buffer, size_t length, bool shouldHashData){
 	
+	_calculateHash = shouldHashData;
 	size_t nparsed = http_parser_execute(&_parser,
 													 &_hpCB,
 													 (const char*) buffer, length);
@@ -213,3 +233,35 @@ size_t REST_URL::processData(const void *buffer, size_t length){
 	return nparsed;
 	
 }
+
+// string 	REST_URL::calculateHMAC(string key){
+//
+//	string result;
+//
+//	string userString;
+//
+//	string timeString;
+//	if(headers().count("X-auth-date")) {
+//		timeString =  headers().at("X-auth-date");
+//		// we need to roumnd this to the 5 minute interval?
+//	}
+//
+//	// get the user/ApI KEY
+//	if(headers().count("X-auth-key")) {
+//		userString =  headers().at("X-auth-key");
+// 	}
+//
+//	string  http_method = string(http_method_str(_method));
+// 	string path = std::accumulate(_path.begin(), _path.end(), string("/"));
+//
+//	string kSigning = http_method  + "|" + path
+//	+ "|" + _bodyHashHex  + "|" + timeString
+//	+ "|" + userString;
+//
+//	string hmacStr = 	hmac<SHA256> (kSigning, key);
+//	//				cout << "hmac: " << hmacStr << "\n";
+//	//
+//
+//	return hmacStr;
+//
+//}

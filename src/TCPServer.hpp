@@ -48,9 +48,7 @@ public:
 
 private:
 	static TCPServerMgr *sharedInstance;
-
 	unordered_set<TCPServer*> _servers;
-	
 };
 
 class TCPServerConnection { 
@@ -65,7 +63,8 @@ public:
 	// for subclass
 	virtual void sendString(const std::string) = 0;
 	virtual void queueRESTCommand( REST_URL url, ServerCmdQueue::cmdCallback_t completion  );
-
+	virtual bool getAPISecret(string APIkey, string &APISecret);
+ 
 	// useful but not necessary
 	virtual void closeConnection() = 0;
 	virtual bool isConnected() = 0;
@@ -79,6 +78,7 @@ public:
 protected:
 	TCPServerConnection(TCPClientInfo::clientType_t clientType,
 							  const string clientName );
+	
 	virtual ~TCPServerConnection() {};
  
 	int 						 _fd;

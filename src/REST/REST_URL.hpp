@@ -38,7 +38,7 @@ public:
 	void setURL(string urlString) {	 processData(urlString.c_str(), urlString.size());};
 	void setCallBack(restCallback_t cb) {_completion = cb; };
 	
-	size_t processData(const void *buffer, size_t length);
+	size_t processData(const void *buffer, size_t length, bool shouldHashData = false);
 
  	bool 						isValid() 		{return _valid;};
 	
@@ -48,7 +48,12 @@ public:
 	json 						&body()			{return _body;};
 	map<string, string> 	&queries() 		{return _queries;};
 	map<string, string> 	&headers() 		{return _headers;};
- 	
+	
+	string 	bodyHash() 	{return _bodyHashHex;};
+	
+ 
+	//string 	calculateHMAC(string key);
+		
 private:
 
 	void commonInit();
@@ -60,7 +65,9 @@ private:
 	map<string, string> 	_queries;
 	map<string, string> 	_headers;
 
-	
+	bool						_calculateHash;
+	string						_bodyHashHex;
+ 
 	restCallback_t _completion;
 	
 	http_parser 				_parser;

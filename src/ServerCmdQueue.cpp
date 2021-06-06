@@ -26,10 +26,14 @@ ServerCmdQueue *ServerCmdQueue::sharedInstance = 0;
 
 ServerCmdQueue::ServerCmdQueue() {
 	_nounHandlers.clear();
+	_APISecrets.clear();
+	
+	apiSecretLoad();
 };
 
 ServerCmdQueue::~ServerCmdQueue() {
 	_nounHandlers.clear();
+	_APISecrets.clear();
 };
 
 bool ServerCmdQueue::registerNoun(	string_view noun,
@@ -85,3 +89,37 @@ void ServerCmdQueue::queueRESTCommand(  REST_URL url,
 		
 	}
 }
+
+// MARK: - User Authentication
+ 
+bool ServerCmdQueue::apiSecretLoad() {
+	return true;
+
+}
+
+bool ServerCmdQueue::apiSecretSave() {
+	return true;
+}
+
+
+bool ServerCmdQueue::apiSecretCreate(string APIkey, string APISecret){
+	
+	_APISecrets[APIkey] = APISecret;
+	return true;
+}
+
+bool ServerCmdQueue::apiSecretDelete(string APIkey){
+	_APISecrets[APIkey].erase();
+	return true;
+}
+ 
+bool ServerCmdQueue::apiSecretGetSecret(string APIkey, string &APISecret){
+	
+	if(_APISecrets.count(APIkey) == 0)
+		return false;
+	
+	APISecret = _APISecrets[APIkey];
+	return true;
+}
+
+

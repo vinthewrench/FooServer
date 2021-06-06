@@ -81,6 +81,12 @@ void TCPServerConnection::queueRESTCommand( REST_URL url,
 	
 }
 
+bool TCPServerConnection::getAPISecret(string APIkey, string &APISecret){
+	
+	return _cmdQueue->apiSecretGetSecret(APIkey, APISecret);
+
+}
+
 // MARK: - TCPServer
 
 TCPServer::TCPServer(ServerCmdQueue* cmdQueue) {

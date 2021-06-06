@@ -40,9 +40,10 @@ private:
 
 	bool validateRequestCredentials();
  
-	REST_URL	_rURL;
+	REST_URL				_rURL;
 	bool					_isOpen;
 
+	bool					_shouldAuthenticate;	// should authenticate all requests
 };
 
 #endif /* RESTServerConnection_hpp */

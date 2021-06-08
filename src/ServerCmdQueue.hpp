@@ -29,25 +29,35 @@
 using namespace nlohmann;
 using namespace std;
 
+class APISecretMgr {
+
+public:
+	
+	virtual ~APISecretMgr(){};
+	virtual bool apiSecretCreate(string APIkey, string APISecret) = 0;
+	virtual bool apiSecretDelete(string APIkey) = 0;
+	virtual bool apiSecretGetSecret(string APIkey, string &APISecret) = 0;
+};
+
 
 class ServerCmdQueue {
 
 public:
 	
+	typedef std::function<void(	json reply,
+										httpStatusCodes_t code)> cmdCallback_t;
+
 	static ServerCmdQueue *shared() {
-			if (!sharedInstance)
-				sharedInstance = new ServerCmdQueue;
+				if(!sharedInstance)
+					throw std::runtime_error("ServerCmdQueue not setup");
 			return sharedInstance;
 		}
 
 	static ServerCmdQueue *sharedInstance;
-	
-	ServerCmdQueue();
+
+	ServerCmdQueue(APISecretMgr *apiSecretmgr);
 	~ServerCmdQueue();
-	
-	typedef std::function<void(	json reply,
-										httpStatusCodes_t code)> cmdCallback_t;
-	
+
 	void queueRESTCommand( REST_URL url,
 								TCPClientInfo cInfo,
 								cmdCallback_t completion );
@@ -70,9 +80,7 @@ private:
 	
 	map<string_view,  	nounHandler_t> _nounHandlers;
 	nounHandler_t 		handlerForNoun(string noun);
-
-	map<string,  string> _APISecrets;
-
+	APISecretMgr* 		_apiSecretMgr;
 };
 
 #endif /* ServerCmdQueue_hpp */

@@ -13,6 +13,7 @@
 #include "json.hpp"
 #include "Utils.hpp"
 
+
 #include "ServerCmdQueue.hpp"
 #include "TCPClientInfo.hpp"
 
@@ -24,23 +25,20 @@ using namespace std;
 
 ServerCmdQueue *ServerCmdQueue::sharedInstance = 0;
 
-ServerCmdQueue::ServerCmdQueue() {
+ServerCmdQueue::ServerCmdQueue(APISecretMgr *apiSecretmgr) {
 	_nounHandlers.clear();
-	_APISecrets.clear();
-	
-	apiSecretLoad();
+	_apiSecretMgr = apiSecretmgr;
+	sharedInstance = this;
 };
 
 ServerCmdQueue::~ServerCmdQueue() {
 	_nounHandlers.clear();
-	_APISecrets.clear();
 };
 
 bool ServerCmdQueue::registerNoun(	string_view noun,
 											 nounHandler_t handler ) {
 	if(handler)
 		_nounHandlers.insert( {noun, handler} );
-
 	return true;
 }
 
@@ -91,35 +89,17 @@ void ServerCmdQueue::queueRESTCommand(  REST_URL url,
 }
 
 // MARK: - User Authentication
- 
-bool ServerCmdQueue::apiSecretLoad() {
-	return true;
-
-}
-
-bool ServerCmdQueue::apiSecretSave() {
-	return true;
-}
-
 
 bool ServerCmdQueue::apiSecretCreate(string APIkey, string APISecret){
-	
-	_APISecrets[APIkey] = APISecret;
-	return true;
+	return _apiSecretMgr->apiSecretCreate(APIkey,APISecret );
 }
 
 bool ServerCmdQueue::apiSecretDelete(string APIkey){
-	_APISecrets[APIkey].erase();
-	return true;
+	return _apiSecretMgr->apiSecretDelete(APIkey);
 }
  
 bool ServerCmdQueue::apiSecretGetSecret(string APIkey, string &APISecret){
-	
-	if(_APISecrets.count(APIkey) == 0)
-		return false;
-	
-	APISecret = _APISecrets[APIkey];
-	return true;
+	return _apiSecretMgr->apiSecretGetSecret(APIkey, APISecret);
 }
 
 

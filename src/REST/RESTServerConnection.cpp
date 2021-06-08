@@ -205,14 +205,12 @@ bool RESTServerConnection::validateRequestCredentials(){
 	+ "|" + _rURL.bodyHash()  + "|" + timeString
 	+ "|" + authKey;
 	
-	
 	if(! getAPISecret(authKey, APISecret))
 		return false;
 	
-	string hmacStr = 	hmac<SHA256> (stringToSign, "12345");
+	string hmacStr = 	hmac<SHA256> (stringToSign, APISecret);
 	
 	return  authString == hmacStr;
-	
 }
  
 

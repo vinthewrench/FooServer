@@ -116,9 +116,12 @@ void TCPServer::begin(int portNum,  bool localHostOnly, factoryCallback_t factor
 	_port = portNum;
 	_factory = factory;
 	_running = true;
+	_localHostOnly = localHostOnly;
 	_thread = std::thread(&TCPServer::run, this);
 	
 	TCPServerMgr().shared()->registerServer(this);
+	
+	
 }
 /**
  * Stops the server by setting _running flag to false.
@@ -267,7 +270,7 @@ int TCPServer::socket_bind(){
 	 memset(&hints, 0, sizeof hints);
 	 
 	 //Initialize connection information
-	 hints.ai_family =   /*AF_INET; */ AF_UNSPEC;			//Supports IPv4 and IPv6
+	 hints.ai_family =   AF_INET; // AF_UNSPEC;			//Supports IPv4 and IPv6
 	 hints.ai_socktype = SOCK_STREAM;		//Reliable Stream (TCP)
 	 hints.ai_flags = AI_PASSIVE;			//Assign local host address to socket
 	 

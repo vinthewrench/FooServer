@@ -102,4 +102,8 @@ bool ServerCmdQueue::apiSecretGetSecret(string APIkey, string &APISecret){
 	return _apiSecretMgr->apiSecretGetSecret(APIkey, APISecret);
 }
 
+bool ServerCmdQueue::apiSecretMustAuthenticate(){
+	return _apiSecretMgr->apiSecretMustAuthenticate();
+}
+
 

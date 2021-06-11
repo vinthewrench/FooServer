@@ -37,8 +37,7 @@ RESTServerConnection::RESTServerConnection()
 :TCPServerConnection(TCPClientInfo::CLIENT_REST, "REST"){
 
 	_isOpen = false;
-	_shouldAuthenticate = true;
-	
+
 	_rURL.setCallBack([=] (){
 		
 		string errorReply;
@@ -50,8 +49,9 @@ RESTServerConnection::RESTServerConnection()
 		}
 		
 		auto body = _rURL.body();
-		
-		if( _shouldAuthenticate == false 
+		bool mustAuthenticate = apiSecretMustAuthenticate();
+
+		if( mustAuthenticate == false
 			|| validateRequestCredentials()){
 			
 			queueRESTCommand(_rURL, [=] (json rp, httpStatusCodes_t code){

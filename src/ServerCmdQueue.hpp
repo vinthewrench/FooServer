@@ -37,6 +37,7 @@ public:
 	virtual bool apiSecretCreate(string APIkey, string APISecret) = 0;
 	virtual bool apiSecretDelete(string APIkey) = 0;
 	virtual bool apiSecretGetSecret(string APIkey, string &APISecret) = 0;
+	virtual bool apiSecretMustAuthenticate() = 0;
 };
 
 
@@ -75,6 +76,7 @@ public:
 	bool apiSecretGetSecret(string APIkey, string &APISecret);
 	bool apiSecretLoad();
 	bool apiSecretSave();
+	bool apiSecretMustAuthenticate();
 
 private:
 	

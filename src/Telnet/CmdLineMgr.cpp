@@ -39,6 +39,7 @@ CmdLineMgr::~CmdLineMgr(){
 
 void CmdLineMgr::didConnect(){
 	registerBuiltInCommands();
+	doWelcome();
 	_cmdLineBuffer.didConnect();
 }
 
@@ -197,6 +198,13 @@ stringvector CmdLineMgr::matchesForCmd( const std::string cmd){
 };
 // MARK: - built in commands
  
+
+void CmdLineMgr::doWelcome(){
+	
+	sendReply("Display Welcome and Version\r\n");
+
+}
+
 void CmdLineMgr::doWhatIsMyIP(stringvector params){
  
 	string str = _server->_info.remoteAddrString();

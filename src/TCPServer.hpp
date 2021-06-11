@@ -64,6 +64,7 @@ public:
 	virtual void sendString(const std::string) = 0;
 	virtual void queueRESTCommand( REST_URL url, ServerCmdQueue::cmdCallback_t completion  );
 	virtual bool getAPISecret(string APIkey, string &APISecret);
+	virtual bool apiSecretMustAuthenticate();
  
 	// useful but not necessary
 	virtual void closeConnection() = 0;

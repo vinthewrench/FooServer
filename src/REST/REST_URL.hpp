@@ -50,9 +50,6 @@ public:
 	map<string, string> 	&headers() 		{return _headers;};
 	
 	string 	bodyHash() 	{return _bodyHashHex;};
-	
- 
-	//string 	calculateHMAC(string key);
 		
 private:
 

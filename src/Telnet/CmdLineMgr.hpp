@@ -53,6 +53,7 @@ private:
 	void doWhatIsMyIP(stringvector params);
 	void doFinger(stringvector params);
 	void doHelp(stringvector params);
+	void doWelcome();
 	
 	TCPServerConnection*	_server;
 	CmdLineBuffer 			_cmdLineBuffer;

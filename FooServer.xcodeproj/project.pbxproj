@@ -9,14 +9,11 @@
 /* Begin PBXBuildFile section */
 		2E6ADB42266ACFFA00E14B8C /* sha3.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB38266ACFFA00E14B8C /* sha3.h */; };
 		2E6ADB43266ACFFA00E14B8C /* sha256.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB39266ACFFA00E14B8C /* sha256.h */; };
-		2E6ADB44266ACFFA00E14B8C /* keccak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6ADB3A266ACFFA00E14B8C /* keccak.cpp */; };
-		2E6ADB45266ACFFA00E14B8C /* sha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6ADB3B266ACFFA00E14B8C /* sha1.cpp */; };
 		2E6ADB46266ACFFA00E14B8C /* keccak.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB3C266ACFFA00E14B8C /* keccak.h */; };
 		2E6ADB47266ACFFA00E14B8C /* sha1.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB3D266ACFFA00E14B8C /* sha1.h */; };
 		2E6ADB48266ACFFA00E14B8C /* hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB3E266ACFFA00E14B8C /* hash.h */; };
 		2E6ADB49266ACFFA00E14B8C /* hmac.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB3F266ACFFA00E14B8C /* hmac.h */; };
 		2E6ADB4A266ACFFA00E14B8C /* sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6ADB40266ACFFA00E14B8C /* sha256.cpp */; };
-		2E6ADB4B266ACFFA00E14B8C /* sha3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6ADB41266ACFFA00E14B8C /* sha3.cpp */; };
 		2EA770DB261E213B00045F27 /* TCPServer.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E83BB3025FC26EB000B2BA3 /* TCPServer.hpp */; };
 		2EA770DC261E213B00045F27 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E83BB2F25FC26EB000B2BA3 /* TCPServer.cpp */; };
 		2EA770DD261E213B00045F27 /* RESTutils.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA770A8261E16F900045F27 /* RESTutils.hpp */; };
@@ -284,7 +281,6 @@
 				2EC68B27264DA1B600541251 /* CmdLineHelp.cpp in Sources */,
 				2EA7712E261E5E2F00045F27 /* TCPClientInfo.cpp in Sources */,
 				2EA770FA261E215600045F27 /* yuarel.h in Sources */,
-				2E6ADB45266ACFFA00E14B8C /* sha1.cpp in Sources */,
 				2EA770FB261E215600045F27 /* CommonDefs.hpp in Sources */,
 				2EA770FC261E215600045F27 /* json.hpp in Sources */,
 				2EA770FD261E215600045F27 /* Utils.hpp in Sources */,
@@ -294,12 +290,10 @@
 				2EA770EC261E214D00045F27 /* CmdLineRegistry.cpp in Sources */,
 				2EA770ED261E214D00045F27 /* CmdLineMgr.hpp in Sources */,
 				2EA770EE261E214D00045F27 /* CmdLineMgr.cpp in Sources */,
-				2E6ADB44266ACFFA00E14B8C /* keccak.cpp in Sources */,
 				2EA770EF261E214D00045F27 /* CmdLineBuffer.hpp in Sources */,
 				2E6ADB4A266ACFFA00E14B8C /* sha256.cpp in Sources */,
 				2EA770F0261E214D00045F27 /* CmdLineBuffer.cpp in Sources */,
 				2EA770F1261E214D00045F27 /* libtelnet.c in Sources */,
-				2E6ADB4B266ACFFA00E14B8C /* sha3.cpp in Sources */,
 				2EAB077F26420E9A00ABFD77 /* REST_URL.cpp in Sources */,
 				2EA770F2261E214D00045F27 /* libtelnet.h in Sources */,
 				2EA770E3261E214600045F27 /* ServerCmdQueue.hpp in Sources */,

@@ -41,7 +41,7 @@ private:
 
 	string _helpFilePath;
 	
-	std::map < std::string, std::pair<fpos_t,fpos_t>> _topics;
+	std::map < std::string, std::pair<size_t,size_t>> _topics;
 };
 
 #endif /* CmdLineHelp_hpp */

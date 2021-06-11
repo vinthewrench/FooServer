@@ -55,7 +55,7 @@ bool CmdLineHelp::loadHelpFile(){
 	
 	while(fgets(buffer, sizeof(buffer), fp) != NULL) {
 		
-		size_t len = strlen(buffer);
+		fpos_t len = strlen(buffer);
 		if (len == 0) continue;
 		if (len == 1 && buffer[0] == '\n' ) continue;
 		

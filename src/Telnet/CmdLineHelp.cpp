@@ -50,12 +50,12 @@ bool CmdLineHelp::loadHelpFile(){
 	
 	char buffer[256];
 	char topic[33] = {0};
-	fpos_t startPos = 0;
-	fpos_t endPos = 0;
+	size_t startPos = 0;
+	size_t endPos = 0;
 	
 	while(fgets(buffer, sizeof(buffer), fp) != NULL) {
 		
-		fpos_t len = strlen(buffer);
+		size_t len = strlen(buffer);
 		if (len == 0) continue;
 		if (len == 1 && buffer[0] == '\n' ) continue;
 		
@@ -85,14 +85,14 @@ bool CmdLineHelp::loadHelpFile(){
 			&& (strncmp(token, "TOPIC-START", 11) == 0)
 			&& strlen(topic) > 0) {
 			
-			fgetpos(fp, &startPos);
+			startPos = ftell(fp);
 			state = LOAD_TOPIC;
 			continue;
 		}
 		else if(cnt == 1
 				  && (strncmp(token, "TOPIC-END", 9) == 0)){
 			
-			fgetpos(fp, &endPos);
+			endPos = ftell(fp);
 			endPos -=len;  // don't include this line
 			
 //			printf("- %s %lld %lld = %lld\n", topic, startPos, endPos, endPos-startPos);
@@ -149,13 +149,13 @@ string CmdLineHelp::helpForTopic( string topic){
 
 	if(_topics.count(topic) >0) {
 		auto value = _topics.at(topic);
-		fpos_t startpos = value.first;
-		fpos_t endpos = value.second;
+		size_t startpos = value.first;
+		size_t endpos = value.second;
 		size_t len =  endpos-startpos;
 		
 		FILE * fp;
 		if( (fp = fopen (_helpFilePath.c_str()	, "r")) != NULL) {
-			fsetpos(fp, &startpos);
+			fseek(fp,startpos, SEEK_SET );
 			char* data = (char*) malloc(len);
 			fread(data, len, 1, fp);
 			string str = string(data,len);

@@ -14,6 +14,10 @@
 		2E6ADB48266ACFFA00E14B8C /* hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB3E266ACFFA00E14B8C /* hash.h */; };
 		2E6ADB49266ACFFA00E14B8C /* hmac.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E6ADB3F266ACFFA00E14B8C /* hmac.h */; };
 		2E6ADB4A266ACFFA00E14B8C /* sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E6ADB40266ACFFA00E14B8C /* sha256.cpp */; };
+		2E7F8C2A2683AE250084DE87 /* TimeStamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7F8C282683AE240084DE87 /* TimeStamp.cpp */; };
+		2E7F8C2B2683AE250084DE87 /* TimeStamp.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2E7F8C292683AE240084DE87 /* TimeStamp.hpp */; };
+		2E7F8C302683AE2E0084DE87 /* LogMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E7F8C2E2683AE2E0084DE87 /* LogMgr.cpp */; };
+		2E7F8C312683AE2E0084DE87 /* LogMgr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 2E7F8C2F2683AE2E0084DE87 /* LogMgr.hpp */; };
 		2EA770DB261E213B00045F27 /* TCPServer.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E83BB3025FC26EB000B2BA3 /* TCPServer.hpp */; };
 		2EA770DC261E213B00045F27 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E83BB2F25FC26EB000B2BA3 /* TCPServer.cpp */; };
 		2EA770DD261E213B00045F27 /* RESTutils.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EA770A8261E16F900045F27 /* RESTutils.hpp */; };
@@ -61,6 +65,10 @@
 		2E6ADB3F266ACFFA00E14B8C /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
 		2E6ADB40266ACFFA00E14B8C /* sha256.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha256.cpp; sourceTree = "<group>"; };
 		2E6ADB41266ACFFA00E14B8C /* sha3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha3.cpp; sourceTree = "<group>"; };
+		2E7F8C282683AE240084DE87 /* TimeStamp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStamp.cpp; sourceTree = "<group>"; };
+		2E7F8C292683AE240084DE87 /* TimeStamp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TimeStamp.hpp; sourceTree = "<group>"; };
+		2E7F8C2E2683AE2E0084DE87 /* LogMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LogMgr.cpp; sourceTree = "<group>"; };
+		2E7F8C2F2683AE2E0084DE87 /* LogMgr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LogMgr.hpp; sourceTree = "<group>"; };
 		2E83BB2F25FC26EB000B2BA3 /* TCPServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TCPServer.cpp; sourceTree = "<group>"; };
 		2E83BB3025FC26EB000B2BA3 /* TCPServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TCPServer.hpp; sourceTree = "<group>"; };
 		2E83BB3325FC29B2000B2BA3 /* libtelnet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = libtelnet.c; sourceTree = "<group>"; };
@@ -186,6 +194,10 @@
 				2E6A43D8260177A600D8A806 /* Telnet */,
 				2E6A43DE2601888000D8A806 /* REST */,
 				2EB3990D26054D19003ED779 /* CommonDefs.hpp */,
+				2E7F8C282683AE240084DE87 /* TimeStamp.cpp */,
+				2E7F8C292683AE240084DE87 /* TimeStamp.hpp */,
+				2E7F8C2E2683AE2E0084DE87 /* LogMgr.cpp */,
+				2E7F8C2F2683AE2E0084DE87 /* LogMgr.hpp */,
 				2EFCF46025FD57180048202E /* json.hpp */,
 				2E6A43D42601139400D8A806 /* Utils.hpp */,
 			);
@@ -208,9 +220,11 @@
 			files = (
 				2EC68B28264DA1B600541251 /* CmdLineHelp.hpp in Headers */,
 				2E6ADB47266ACFFA00E14B8C /* sha1.h in Headers */,
+				2E7F8C2B2683AE250084DE87 /* TimeStamp.hpp in Headers */,
 				2E6ADB48266ACFFA00E14B8C /* hash.h in Headers */,
 				2EAB078026420E9A00ABFD77 /* REST_URL.hpp in Headers */,
 				2E6ADB42266ACFFA00E14B8C /* sha3.h in Headers */,
+				2E7F8C312683AE2E0084DE87 /* LogMgr.hpp in Headers */,
 				2E6ADB49266ACFFA00E14B8C /* hmac.h in Headers */,
 				2E6ADB46266ACFFA00E14B8C /* keccak.h in Headers */,
 				2E6ADB43266ACFFA00E14B8C /* sha256.h in Headers */,
@@ -276,6 +290,8 @@
 				2EA770F5261E215600045F27 /* RESTServerConnection.hpp in Sources */,
 				2EA770F6261E215600045F27 /* RESTServerConnection.cpp in Sources */,
 				2EA770F7261E215600045F27 /* http_parser.c in Sources */,
+				2E7F8C302683AE2E0084DE87 /* LogMgr.cpp in Sources */,
+				2E7F8C2A2683AE250084DE87 /* TimeStamp.cpp in Sources */,
 				2EA770F8261E215600045F27 /* http_parser.h in Sources */,
 				2EA770F9261E215600045F27 /* yuarel.c in Sources */,
 				2EC68B27264DA1B600541251 /* CmdLineHelp.cpp in Sources */,

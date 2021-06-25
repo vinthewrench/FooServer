@@ -23,6 +23,8 @@ class CmdLineRegistry {
  
 public:
 	
+	constexpr static string_view CMD_WELCOME 		= "welcome";
+
 	static CmdLineRegistry *shared() {
 			if (!sharedInstance)
 				sharedInstance = new CmdLineRegistry;
@@ -37,8 +39,11 @@ public:
  	typedef std::function< bool (stringvector commandLine,
 										  CmdLineMgr* mgr,
 										  boolCallback_t	cb)> cmdHandler_t;
- 
-	void registerCommand(const string name,
+// 
+//	void registerCommand(const string name,
+//								cmdHandler_t cb = NULL);
+
+	void registerCommand(string_view name,
 								cmdHandler_t cb = NULL);
 
 	void removeCommand(const string name);
@@ -53,7 +58,7 @@ public:
 	
 protected:
 
-	map<string, cmdHandler_t> _commandMap;
+	map<const string, cmdHandler_t> _commandMap;
 
 };
 

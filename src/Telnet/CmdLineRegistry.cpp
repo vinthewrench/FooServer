@@ -21,13 +21,14 @@ CmdLineRegistry::~CmdLineRegistry(){
 	_commandMap.clear();
 }
 
-
-void CmdLineRegistry::registerCommand(const string name,
+ 
+void CmdLineRegistry::registerCommand(string_view name,
 												  cmdHandler_t cb){
-	string str = name;
+	string str = string(name);
  	std::transform(str.begin(), str.end(), str.begin(), ::tolower);
 	_commandMap[str] = cb;
 }
+
 
 void CmdLineRegistry::removeCommand(const string name){
 	string str = name;
@@ -60,7 +61,10 @@ vector<string> CmdLineRegistry::registeredCommands(){
 	results.clear();
  
 	for(auto it = _commandMap.begin();  it != _commandMap.end(); ++it) {
-		results.push_back(it->first);
+
+		// ignore built in commands.
+		if(it->first == CMD_WELCOME) continue;
+		results.push_back( string(it->first));
 	};
 	
 	return results;

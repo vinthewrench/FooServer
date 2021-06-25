@@ -24,7 +24,8 @@
 
 //Class Headers
 #include "TCPServer.hpp"
- 
+#include "LogMgr.hpp"
+
 // MARK: - TCPServerMgr
 
 TCPServerMgr *TCPServerMgr::sharedInstance = 0;
@@ -379,6 +380,7 @@ int TCPServer::check_new_connection(int max_fd){
 			
 	//		printf("OPEN %d\n", client_fd);
 			conn->didOpen();
+			
 		}
 	}
 	return max_fd;

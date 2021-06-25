@@ -201,8 +201,13 @@ stringvector CmdLineMgr::matchesForCmd( const std::string cmd){
 
 void CmdLineMgr::doWelcome(){
 	
-	sendReply("Display Welcome and Version\r\n");
-
+	
+	CmdLineRegistry* reg = CmdLineRegistry::shared();
+ 
+	auto cmCb = reg->handlerForCmd(string(CmdLineRegistry::CMD_WELCOME));
+	if(cmCb){
+		cmCb({"welcome"}, this, [] (bool didSucceed){ });
+	}
 }
 
 void CmdLineMgr::doWhatIsMyIP(stringvector params){

@@ -11,6 +11,8 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
+#include "LogMgr.hpp"
+
 using namespace std;
 
 struct TelnetServerConnection::Private
@@ -146,6 +148,9 @@ void TelnetServerConnection::didOpen() {
  	telnet_ttype_send(_tn);
 	
 	_cmdLineMgr.didConnect();
+	
+	string remoteStr = _info.remoteAddrString();
+	LOGT_INFO("TELNET OPEN from %s\n", remoteStr.c_str());
 };
 
 
@@ -157,6 +162,10 @@ void TelnetServerConnection::sendString(const string str){
 
 void TelnetServerConnection::closeConnection(){
 	_closing = true;
+	
+	string remoteStr = _info.remoteAddrString();
+	LOGT_INFO("TELNET CLOSE from %s\n", remoteStr.c_str());
+
 }
 
 bool TelnetServerConnection::isConnected(){

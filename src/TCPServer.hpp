@@ -19,6 +19,8 @@
 #include <thread>			//Needed for std::thread
 #include <cstring>			//Needed for memset and string functions
 #include <list>
+#include <set>
+
 #include <netinet/in.h>
 #include <unordered_set>
 #include "ServerCmdQueue.hpp"
@@ -74,9 +76,10 @@ public:
 	void 				close();
 	
 	TCPClientInfo	_info;
-	uint8_t 			_id;			// this can be protected ?
+	uint8_t 			_id;
 
 protected:
+	
 	TCPServerConnection(TCPClientInfo::clientType_t clientType,
 							  const string clientName );
 	
@@ -128,6 +131,8 @@ public:
 	
 	int getPort() {return _port; };
 	
+	bool isConnectionActive(uint8_t connID);
+	
 protected:
 	void close_socket(int);
 
@@ -157,7 +162,8 @@ private:
 	int socket_bind();
 	int check_new_connection(int max_fd);
 	
-	uint8_t	_entryCnt;
+	uint8_t				_entryCnt;
+	set <uint8_t> 		_activeConnectionIDs;
 
 	int _listener_fd;
 	fd_set _read_fds;		//Socket descriptor set that holds the sockets that are ready for read

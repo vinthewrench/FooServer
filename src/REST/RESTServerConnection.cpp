@@ -54,8 +54,16 @@ RESTServerConnection::RESTServerConnection()
 		if( mustAuthenticate == false
 			|| validateRequestCredentials()){
 			
+			
+			uint8_t 		savedID = _id;
+			TCPServer*  savedServer = _server;
+			
 			queueRESTCommand(_rURL, [=] (json rp, httpStatusCodes_t code){
-				
+	
+		// check if connection dropped 
+				if(!savedServer || !savedServer->isConnectionActive(savedID))
+					return;
+	
 				string body;
 				if(rp.size())
 					body = rp.dump();
@@ -68,7 +76,7 @@ RESTServerConnection::RESTServerConnection()
 				header += HTTPHEADER_CRLF;
 				string reply = header + body;
 				
-				sendString(reply);
+					sendString(reply);
 			});
 		}
 		else {

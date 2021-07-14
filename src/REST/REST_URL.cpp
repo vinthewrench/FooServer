@@ -40,7 +40,9 @@ struct REST_URL::Private
 		if(rs->_calculateHash){
 			SHA256 hash;
 			
-			if(rs->_bodyBytes && strlen(rs->_bodyBytes)){
+			if(rs->_bodyBytes
+				&& strlen(rs->_bodyBytes) > 0
+				&& (string(rs->_bodyBytes) != "{}")) {
 				hash.add(rs->_bodyBytes, strlen(rs->_bodyBytes));
 			}
 			else

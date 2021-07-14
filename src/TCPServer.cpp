@@ -11,6 +11,7 @@
 #include <cstring>			//Needed for memset and string functions
 #include <queue>			//Needed for std::queue
 #include <unistd.h>			//Needed for sleep
+#include <utility>
 
 //Socket Includes
 #include <sys/socket.h>		//Core socket functions and data structures
@@ -97,6 +98,8 @@ TCPServer::TCPServer(ServerCmdQueue* cmdQueue) {
 	_cmdQueue = cmdQueue;
 	_running = false;
 	_entryCnt = 0;
+	
+	_activeConnectionIDs.clear();
 	_localHostOnly = true;
 	_connections.clear();
 }
@@ -138,18 +141,10 @@ void TCPServer::stop(){
  		_thread.join();
 }
 
-/**
- * This method is the servers main routine.
- * 		1. Creates a listener socket and bind it to the given port
- * 		2. Start listening on the given port.
- * 		3. Sets all sockets to be non-blocking.
- * 		4. Creates a set to hold all active sockets (connection)
- * 		5. While running flag is true:
- * 			5.1 Check for changes in active sockets.
- * 			5.2 If listener socket has new connection - Accept it and add to set.
- * 			5.3 If some client socket received data (bytes > 0) - Handle it.
- * 		6. Close all sockets - terminate server.
- */
+
+bool TCPServer::isConnectionActive(uint8_t connID){
+	return _activeConnectionIDs.count(connID);
+}
 
 #define EXIT_STATUS 1
 
@@ -224,6 +219,8 @@ void TCPServer::run(){
 						if(conn){
 							
 							conn->willClose();
+							
+							_activeConnectionIDs.erase(conn->_id);
 							
 							// remove entry from list
 							_connections.remove_if ([conn](const TCPServerConnection* e){
@@ -364,13 +361,13 @@ int TCPServer::check_new_connection(int max_fd){
 			//Update max_fd
 			if (client_fd > max_fd)
 				max_fd = client_fd;
-			
 		
 			TCPServerConnection* conn = _factory();
 	 		conn->_server = this;
 			conn->_cmdQueue = _cmdQueue;
 			conn->_fd = client_fd;
 			conn->_id = _entryCnt++; // every entry id unique
+			_activeConnectionIDs.insert(conn->_id);
 	
 			conn->_info._remoteAddr = their_addr;
 			conn->_info._localPort	 = _port;

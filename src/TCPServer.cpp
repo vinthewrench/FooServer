@@ -274,7 +274,7 @@ int TCPServer::socket_bind(){
 	 
 	 //Get address information
 	 int err;
-	 err = getaddrinfo(_allowRemote?"localhost":"0.0.0.0",
+	err = getaddrinfo(_allowRemote?"0.0.0.0":"localhost",
 							 std::to_string(_port).c_str(), &hints, &server_info_list);
 	 if (err != 0){
 		 std::cerr << "getaddrinfo: " << gai_strerror(err) << std::endl;

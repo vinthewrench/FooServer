@@ -100,7 +100,7 @@ TCPServer::TCPServer(ServerCmdQueue* cmdQueue) {
 	_entryCnt = 0;
 	
 	_activeConnectionIDs.clear();
-	_localHostOnly = true;
+	_allowRemote = false;
 	_connections.clear();
 }
 
@@ -111,7 +111,7 @@ TCPServer::~TCPServer() {
 		_thread.join();
 }
 
-void TCPServer::begin(int portNum,  bool localHostOnly, factoryCallback_t factory){
+void TCPServer::begin(int portNum,  bool allowRemote, factoryCallback_t factory){
 
 	//Clearing master and read sets
 	FD_ZERO(&_master_fds);
@@ -120,7 +120,7 @@ void TCPServer::begin(int portNum,  bool localHostOnly, factoryCallback_t factor
 	_port = portNum;
 	_factory = factory;
 	_running = true;
-	_localHostOnly = localHostOnly;
+	_allowRemote = allowRemote;
 	_thread = std::thread(&TCPServer::run, this);
 	
 	TCPServerMgr().shared()->registerServer(this);
@@ -274,7 +274,7 @@ int TCPServer::socket_bind(){
 	 
 	 //Get address information
 	 int err;
-	 err = getaddrinfo(_localHostOnly?"localhost":"0.0.0.0",
+	 err = getaddrinfo(_allowRemote?"localhost":"0.0.0.0",
 							 std::to_string(_port).c_str(), &hints, &server_info_list);
 	 if (err != 0){
 		 std::cerr << "getaddrinfo: " << gai_strerror(err) << std::endl;

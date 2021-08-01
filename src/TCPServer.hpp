@@ -142,7 +142,7 @@ private:
 	ServerCmdQueue* 		_cmdQueue;
 	
 	int				 		_port;					//Listener port
-	bool					_localHostOnly;	
+	bool					_allowRemote;	
 
 	bool 					_running;				//Flag for starting and terminating the main loop
 	std::thread 			_thread;				//Internal thread, this is in order to start and stop the thread from different class methods

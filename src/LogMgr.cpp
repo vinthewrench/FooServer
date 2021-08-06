@@ -108,15 +108,22 @@ void LogMgr::writeToLog(const uint8_t* buf, size_t len){
 bool LogMgr::setLogFilePath(string path ){
 	bool  statusOk = false;
 	
-	if( path	.size() == 0 ){
+	if( path.size() == 0 ){
 		if(_ofs.is_open()) {
 			_ofs.flush();
 			_ofs.close();
+			statusOk = true;
 		}
 	}
 	else {
 		
 		try{
+			
+			if(_ofs.is_open()) {
+				_ofs.flush();
+				_ofs.close();
+			}
+			
 			_ofs.open(path, std::ios_base::app);
 		
 			if(_ofs.fail())

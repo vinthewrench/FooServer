@@ -54,11 +54,11 @@ struct TelnetServerConnection::Private
 				break;
 				
 			case TELNET_EV_WARNING:
-				printf( "WARNING: %s\n", ev->error.msg);
+//				printf( "WARNING: %s\n", ev->error.msg);
 				break;
 				
 			case TELNET_EV_ERROR:
-				printf(  "ERROR: %s\n", ev->error.msg);
+//				printf(  "ERROR: %s\n", ev->error.msg);
 				break;
 				
 			case TELNET_EV_SUBNEGOTIATION:

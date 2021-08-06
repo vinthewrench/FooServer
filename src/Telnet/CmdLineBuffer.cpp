@@ -168,7 +168,7 @@ void CmdLineBuffer::processChar(uint8_t ch){
 				_state = CLB_ESC1;
 			
 			else {
-				printf("Unknown ESC %c - %02X\n", ch > CHAR_PRINTABLE?ch:'?', ch);
+//				printf("Unknown ESC %c - %02X\n", ch > CHAR_PRINTABLE?ch:'?', ch);
 				// an error here?
 				_state = CLB_READY;
 			}
@@ -199,7 +199,7 @@ void CmdLineBuffer::processChar(uint8_t ch){
 					
 				default:
 					// invalid
-					printf("Unknown ESC [ %c - %02X\n", ch > CHAR_PRINTABLE?ch:'?', ch);
+//					printf("Unknown ESC [ %c - %02X\n", ch > CHAR_PRINTABLE?ch:'?', ch);
 					break;
 			}
 			

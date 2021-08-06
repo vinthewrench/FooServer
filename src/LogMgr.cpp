@@ -96,8 +96,7 @@ void LogMgr::writeToLog(const uint8_t* buf, size_t len){
 	lock_guard<std::mutex> lock(_mutex);
 
 	if(len){
-		printf("%.*s",(int)len, buf);
-
+//		printf("%.*s",(int)len, buf);
 		if(_ofs.is_open()) {
 			_ofs.write( (char*)buf, len);
 			_ofs.flush();
@@ -122,6 +121,7 @@ bool LogMgr::setLogFilePath(string path ){
 		
 			if(_ofs.fail())
 				return false;
+			
 			logTimedStampString("Log Start");
 			statusOk = true;
 		}

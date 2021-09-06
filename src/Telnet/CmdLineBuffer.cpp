@@ -65,8 +65,15 @@ void  CmdLineBuffer::didConnect(){
 }
 
 void  CmdLineBuffer::didDisconnect(){
+	
+//	if (_waitForCharCB != NULL){
+//		(_waitForCharCB)(false, 0);
+//	}
+ 
 	_state = CLB_UNKNOWN;
-	clear();
+	_waitForChar.clear();
+	_waitForCharCB = NULL;
+ 	clear();
  }
  
 
@@ -97,6 +104,16 @@ void CmdLineBuffer::setTermSize(uint16_t	 width, uint16_t height){
 }
 
 
+void CmdLineBuffer::waitForChar( std::vector<char> chs,
+										  std::function<void(bool didSucceed, char ch)> callback){
+
+	if(chs.size() > 0 && callback) {
+		_waitForChar = chs;
+	 	_waitForCharCB	= callback;
+	}
+}
+
+
 
 //MARK: -  private
 
@@ -104,11 +121,22 @@ void CmdLineBuffer::processChar(uint8_t ch){
 	
 //	printf("%c - %02X\n", ch > CHAR_PRINTABLE?ch:' ', ch);
 	
-	
 	switch (_state) {
 			
 		case CLB_READY:{
 			
+			if (_waitForCharCB != NULL){
+				if( any_of(_waitForChar.begin(), _waitForChar.end(),
+							  [&](const char elem) { return elem == ch; })) {
+	
+					(_waitForCharCB)(true, ch);
+	
+					_waitForCharCB = NULL;
+					_waitForChar.clear();
+				}
+				break;
+			}
+
 			if(ch != CHAR_TAB && _displayingCompletionOptions)
 				removeCompletions()	;
 			
@@ -206,6 +234,7 @@ void CmdLineBuffer::processChar(uint8_t ch){
 		}
 			break;
 			
+ 
 		default:
 			break;
 	}

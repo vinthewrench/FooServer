@@ -36,7 +36,6 @@ CmdLineMgr::~CmdLineMgr(){
 	
 }
 
-
 void CmdLineMgr::didConnect(){
 	registerBuiltInCommands();
 	doWelcome();
@@ -196,6 +195,17 @@ stringvector CmdLineMgr::matchesForCmd( const std::string cmd){
 
 	return options;
 };
+
+
+
+void CmdLineMgr::waitForChar( std::vector<char> chs,
+									  std::function<void(bool didSucceed, char ch)> callback){
+
+	_cmdLineBuffer.waitForChar(chs,callback);
+}
+
+
+
 // MARK: - built in commands
  
 

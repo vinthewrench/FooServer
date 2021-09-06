@@ -16,8 +16,10 @@
 #include <netinet/in.h>
 #include "CommonDefs.hpp"
 
+class CmdLineMgr;
+
 class  CmdLineBufferManager {
-	
+ 
 public:
 	virtual ~CmdLineBufferManager() {};
 	virtual void sendReply(const std::string) = 0;
@@ -28,6 +30,8 @@ public:
 
  class CmdLineBuffer {
 	
+	 friend class CmdLineMgr;
+
 public:
 	CmdLineBuffer( CmdLineBufferManager * bufMgr);
 	~CmdLineBuffer();
@@ -48,13 +52,18 @@ public:
 	// built in commands
 	void doCmdHistory(stringvector params);
 
-private:
+ protected:
+	 
+	 void waitForChar( std::vector<char> chs,
+							std::function<void(bool didSucceed, char ch)> callback = NULL);
+	 
+ private:
 	
 	typedef enum  {
 		CLB_UNKNOWN = 0,
 		CLB_READY,
 		CLB_ESC,
-		CLB_ESC1,
+		CLB_ESC1
 	}clb_state_t;
 
 	static const uint8_t CHAR_PRINTABLE = 0x1F;
@@ -83,7 +92,7 @@ private:
 	uint16_t	 					_termWidth = 80;
 	
 	void processChar(uint8_t ch);
-
+	 
 	void sendReply(std::string str);
 	
 	void processBuffer();
@@ -123,6 +132,9 @@ private:
 	void delete_char();
 	size_t data_size();
 	
+	std::vector<char> _waitForChar;
+	std::function<void(bool didSucceed, char ch)> _waitForCharCB;
+	 
 	struct  {
 		size_t  	pos;			// cursor pos
 		size_t  	used;			// actual end of buffer

@@ -91,7 +91,7 @@ string errorMessage( json j){
 		}
 		else if(jErr.contains(kREST_errorDetail)
 				  && jErr.at(kREST_errorDetail).is_string()){
-			string message =  jErr.at(kREST_errorMessage);
+			string message =  jErr.at(kREST_errorDetail);
 			msg += message;
 		}
 		else if(jErr.contains(kREST_errorMessage)

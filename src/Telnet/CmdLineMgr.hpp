@@ -43,7 +43,11 @@ public:
 	
 	//convenience wrappers to TCPServerConnection
 	void sendReply(std::string reply);
-	
+
+	// used to verify
+	void waitForChar( std::vector<char> chs,
+						  std::function<void(bool didSucceed, char ch)> callback = NULL);;
+
 	TCPClientInfo getClientInfo() { return _server->_info; };
 	
 private:

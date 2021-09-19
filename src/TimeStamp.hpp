@@ -23,6 +23,7 @@ public:
 	TimeStamp(time_t time) { _time = time;};
  	inline time_t getTime() { return _time; };
 	std::string RFC1123String();
+	std::string ISO8601String();
 	std::string logFileString();
 
 	std::string ClockString(bool isGMT = true);

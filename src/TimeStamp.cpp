@@ -12,6 +12,9 @@ using namespace std;
  
 namespace timestamp {
 	static const char *kDateFormat = "%a, %d %b %Y %T GMT";
+
+static const char *kISO8601Format = "%F %T %Z";
+
 	static const char *kLogFormat = "%d.%m.%y %T"; 
 	static const char *kClockFormat = "%l:%M %p";
 
@@ -40,6 +43,15 @@ namespace timestamp {
 		::strftime(timeStr, sizeof(timeStr), kDateFormat,  gmtime(&_time));
 		return string(timeStr);
 	}
+
+std::string TimeStamp::ISO8601String(){
+	enum { ISO8601_GMT_LEN = 30, ISO8601_GMT_SIZE };
+	char timeStr[ISO8601_GMT_SIZE] = {0};
+	::strftime(timeStr, sizeof(timeStr), kISO8601Format,  gmtime(&_time));
+	return string(timeStr);
+}
+
+
 
 
 std::string TimeStamp::logFileString(){

@@ -13,7 +13,7 @@ using namespace std;
 namespace timestamp {
 	static const char *kDateFormat = "%a, %d %b %Y %T GMT";
 
-static const char *kISO8601Format = "%F %T %Z";
+static const char *kISO8601Format = "%F %T";
 
 	static const char *kLogFormat = "%d.%m.%y %T"; 
 	static const char *kClockFormat = "%l:%M %p";

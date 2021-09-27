@@ -208,13 +208,14 @@ bool RESTServerConnection::validateRequestCredentials(){
 	
 	if(diff > SECS_PER_MIN * quantum)
 		return false;
+
+	if(! getAPISecret(authKey, APISecret))
+		return false;
 	
 	string stringToSign = http_method  + "|" + urlPath
 	+ "|" + _rURL.bodyHash()  + "|" + timeString
 	+ "|" + authKey;
 	
-	if(! getAPISecret(authKey, APISecret))
-		return false;
 	
 	string hmacStr = 	hmac<SHA256> (stringToSign, APISecret);
 	

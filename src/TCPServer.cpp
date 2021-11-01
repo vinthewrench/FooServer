@@ -102,6 +102,9 @@ TCPServer::TCPServer(ServerCmdQueue* cmdQueue) {
 	_activeConnectionIDs.clear();
 	_allowRemote = false;
 	_connections.clear();
+	
+	_timeoutDelay 		= 10;	// time to consider a connection active // mostly for REST
+	_lastConnectTime 	= 0;  // time since last connect
 }
 
 
@@ -116,6 +119,8 @@ void TCPServer::begin(int portNum,  bool allowRemote, factoryCallback_t factory)
 	//Clearing master and read sets
 	FD_ZERO(&_master_fds);
 	FD_ZERO(&_read_fds);
+
+	_lastConnectTime 	= 0;  // time since last connect
 
 	_port = portNum;
 	_factory = factory;
@@ -145,6 +150,23 @@ void TCPServer::stop(){
 bool TCPServer::isConnectionActive(uint8_t connID){
 	return _activeConnectionIDs.count(connID);
 }
+
+bool TCPServer::hasActiveConnections() {
+
+	if(_activeConnectionIDs.size())
+		return true;
+	
+		if(_lastConnectTime == 0)
+			return false;
+
+		time_t now =  time(NULL);
+		
+		if((_lastConnectTime + _timeoutDelay) > now)
+			return true;
+	
+ 	return false;
+}
+
 
 #define EXIT_STATUS 1
 
@@ -219,7 +241,6 @@ void TCPServer::run(){
 						if(conn){
 							
 							conn->willClose();
-							
 							_activeConnectionIDs.erase(conn->_id);
 							
 							// remove entry from list
@@ -377,6 +398,7 @@ int TCPServer::check_new_connection(int max_fd){
 			
 	//		printf("OPEN %d\n", client_fd);
 			conn->didOpen();
+			_lastConnectTime = time(NULL);
 			
 		}
 	}
@@ -399,11 +421,13 @@ void  TCPServer::close_socket(int fd){
 
 	if(conn){
  
+		_activeConnectionIDs.erase(conn->_id);
+
 		// remove entry from list
 		_connections.remove_if ([conn](const TCPServerConnection* e){
 			return e == conn;
 		});
-
+ 
 		close(fd);
 
 		delete conn;

@@ -14,6 +14,7 @@
 #define BUFFER_SIZE 512		//Incoming data buffer size (maximum bytes per incoming data)
 
 #include <unistd.h>
+#include <sys/time.h>
 
 #include <iostream>
 #include <thread>			//Needed for std::thread
@@ -128,10 +129,12 @@ public:
 	 * Stops the main routine and the internal thread.
 	 */
 	void stop();
-	
+
 	int getPort() {return _port; };
 	
 	bool isConnectionActive(uint8_t connID);
+	
+	bool hasActiveConnections();
 	
 protected:
 	void close_socket(int);
@@ -146,6 +149,7 @@ private:
 
 	bool 					_running;				//Flag for starting and terminating the main loop
 	std::thread 			_thread;				//Internal thread, this is in order to start and stop the thread from different class methods
+
 
 	std::list<TCPServerConnection*> _connections;
 	
@@ -164,6 +168,10 @@ private:
 	
 	uint8_t				_entryCnt;
 	set <uint8_t> 		_activeConnectionIDs;
+
+	// used for tracking if we have active connections
+	time_t				_lastConnectTime;
+	time_t     		_timeoutDelay;
 
 	int _listener_fd;
 	fd_set _read_fds;		//Socket descriptor set that holds the sockets that are ready for read

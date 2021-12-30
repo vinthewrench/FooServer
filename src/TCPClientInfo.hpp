@@ -1,6 +1,6 @@
 //
 //  TCPClientInfo.hpp
-//  InsteonServer
+
 //
 //  Created by Vincent Moscaritolo on 4/2/21.
 //

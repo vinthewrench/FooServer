@@ -1,6 +1,4 @@
-# Insteon Server
+Foo Server
 
-
-
-Some text here about what this is about
+see https://vinthewrench.substack.com/p/giving-your-raspberry-pi-a-rest
 

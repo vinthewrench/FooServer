@@ -91,19 +91,29 @@ void ServerCmdQueue::queueRESTCommand(  REST_URL url,
 // MARK: - User Authentication
 
 bool ServerCmdQueue::apiSecretCreate(string APIkey, string APISecret){
-	return _apiSecretMgr->apiSecretCreate(APIkey,APISecret );
+ 
+	return (_apiSecretMgr)
+		?_apiSecretMgr->apiSecretCreate(APIkey,APISecret )
+		:false;
 }
 
 bool ServerCmdQueue::apiSecretDelete(string APIkey){
-	return _apiSecretMgr->apiSecretDelete(APIkey);
+
+	return (_apiSecretMgr)
+		?_apiSecretMgr->apiSecretDelete(APIkey)
+		:false;
 }
  
 bool ServerCmdQueue::apiSecretGetSecret(string APIkey, string &APISecret){
-	return _apiSecretMgr->apiSecretGetSecret(APIkey, APISecret);
-}
+	return (_apiSecretMgr)
+		?_apiSecretMgr->apiSecretGetSecret(APIkey, APISecret)
+		:false;
+ }
 
 bool ServerCmdQueue::apiSecretMustAuthenticate(){
-	return _apiSecretMgr->apiSecretMustAuthenticate();
-}
+	return (_apiSecretMgr)
+		?_apiSecretMgr->apiSecretMustAuthenticate()
+		:false;
+ }
 
 
